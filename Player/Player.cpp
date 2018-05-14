@@ -4,7 +4,6 @@
 #pragma once
 using namespace std;
 
-#include "../Baralho/Card.cpp"
 #include "../Baralho/Deck.cpp"
 
 
@@ -44,6 +43,11 @@ public: Player(string name){
         cout << "Player --> Name:" << name;
     }
 
+    void showHand(){
+        for(int i=0; i<hand.size(); i++)
+            cout << hand.at(i).getNumber() << " " << hand[i].getColour() << endl;
+    }
+
 private:
     string name;
     vector <Card> hand;
@@ -54,7 +58,10 @@ int main(){
     Player player("matheus");
     Deck deck;
     deck.starting();
+    Card card(1, "Azul");
+    deck.addCard(card);
     player.addCard(deck.pullCard());
+    player.showHand();
     player.dropCard(1);
     cout << player.getNumberCards();
 
