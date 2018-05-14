@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 
 #include <vector>
@@ -85,11 +83,11 @@ public:
 
 };
 
-int main() {
+/*int main() {
   srand( time(NULL));
   Deck deck;
   deck.starting();
-cout << deck.isEmpty();
+  cout << deck.isEmpty();
   Card card(1, "Azul");
   deck.addCard(card);
 
@@ -128,4 +126,4 @@ cout << deck.isEmpty();
 
 
 
-}
+}*/
