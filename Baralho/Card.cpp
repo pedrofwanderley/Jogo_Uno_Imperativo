@@ -32,7 +32,7 @@ public:
   }
 
   void toString() const {
-    cout << "Card -> Number: " << (number-1) << " | Colour: " << colour << endl;
+    cout << "Card -> Number: " << number << " | Colour: " << colour << endl;
   }
 
 

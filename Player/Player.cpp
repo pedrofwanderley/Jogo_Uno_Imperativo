@@ -35,7 +35,7 @@ public: Player(int id){
 
     void showHand(){
         for(int i=0; i<hand.size(); i++)
-            cout << hand.at(i).getNumber()-1 << " " << hand[i].getColour() << endl;
+            cout << hand.at(i).getNumber() << " " << hand[i].getColour() << endl;
     }
 
     void setId(int newId) {
