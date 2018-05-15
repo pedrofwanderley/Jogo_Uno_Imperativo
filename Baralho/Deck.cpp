@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <ctime>
 #include <cstdlib>
-
+#pragma once
 using namespace std;
 
 

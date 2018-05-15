@@ -27,8 +27,10 @@ public: Player(string name){
         hand.push_back(card);
     }
 
-    void dropCard(int position){
+    Card dropCard(int position){
+        Card card = hand[position-1];
         hand.erase(hand.begin()+position-1);
+        return card;
     }
 
     int getNumberCards(){
