@@ -9,28 +9,18 @@ using namespace std;
 
 class Player{
 
-public: Player(string name){
-        setNome(name);
+public: Player(int id){
+        setId(id);
     }
         Player(){}
-
-    string getNome(){
-        return name;
-    }
-
-    void setNome(string newName){
-        name = newName;
-    }
 
 
     void addCard(Card card){
         hand.push_back(card);
     }
 
-    Card dropCard(int position){
-        Card card = hand[position-1];
-        hand.erase(hand.begin()+position-1);
-        return card;
+    void dropCard(int position){
+        hand.erase(hand.begin()+ position -1);
     }
 
     int getNumberCards(){
@@ -42,7 +32,7 @@ public: Player(string name){
     }
 
     void toString() const{
-        cout << "Player --> Name:" << name;
+        cout << "Player --> Name:" << id;
     }
 
     void showHand(){
@@ -50,9 +40,23 @@ public: Player(string name){
             cout << hand.at(i).getNumber() << " " << hand[i].getColour() << endl;
     }
 
-private:
-    string name;
+    void setId(int newId) {
+      id = newId;
+    }
+
+    int getId() {
+      return id;
+    }
+
+    Card dropCard(int position){
+        Card card = hand[position-1];
+        hand.erase(hand.begin()+position-1);
+        return card;
+    }
+
+protected:
     vector <Card> hand;
+    int id;
 };
 
 
