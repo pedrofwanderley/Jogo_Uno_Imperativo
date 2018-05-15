@@ -64,12 +64,6 @@ public:
   }
 
 
-
-  /*void shuffle() {
-    random_shuffle(deck.begin(), deck.end());
-
-  }*/
-
   void shuffleDeck () {
     int i,j;
 
@@ -77,7 +71,7 @@ public:
 
         do {
             j = rand()%52;
-        } while (i < j);
+        } while (cardsInDeck < j);
 
         Card card = deck[i];
         deck[i] = deck[j];
