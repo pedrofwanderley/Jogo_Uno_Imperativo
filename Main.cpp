@@ -5,8 +5,19 @@ using namespace std;
 #include "Baralho/Card.cpp"
 #include "Player/Player.cpp"
 
+void distributeCards(Player &player, Deck &deck) {
+  for(int p = 0; p < 7; p++) {
+    Card card = deck.pullCard();
 
+    if(card.getNumber() >= 1) {
+        player.addCard(card);
+    } else {
+      p--;
+    }
+  }
+}
 int main() {
+  srand( time(NULL));
   Deck deck;
   deck.starting();
 
@@ -89,21 +100,10 @@ int main() {
       deck.addCard(card2);
     }
   } */
-  deck.shuffle();
+  deck.shuffleDeck();
+
   Player player(5);
-
-// distribui carta
-  for(int p = 0; p < 7; p++) {
-    Card card = deck.pullCard();
-
-    if(card.getNumber() != 0) {
-        player.addCard(card);
-    } else {
-      p--;
-    }
-
-  }
-
+  distributeCards(player, deck);
   deck.showDeck();
   cout << endl;
   player.showHand();

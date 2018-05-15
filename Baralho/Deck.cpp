@@ -6,6 +6,7 @@
 #include <cstdlib>
 #pragma once
 
+#include <random>
 using namespace std;
 
 
@@ -50,8 +51,6 @@ public:
   }
 
   Card pullCard() {
-
-
       Card card = deck[0];
       deck.erase(it);
 
@@ -66,9 +65,24 @@ public:
 
 
 
-  void shuffle() {
+  /*void shuffle() {
     random_shuffle(deck.begin(), deck.end());
 
+  }*/
+
+  void shuffleDeck () {
+    int i,j;
+
+    for (i = 0; i < cardsInDeck; i++) {
+
+        do {
+            j = rand()%52;
+        } while (i < j);
+
+        Card card = deck[i];
+        deck[i] = deck[j];
+        deck[j] = card;
+    }
   }
 
   bool isEmpty() {

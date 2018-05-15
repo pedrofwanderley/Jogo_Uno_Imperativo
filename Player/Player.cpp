@@ -19,9 +19,7 @@ public: Player(int id){
         hand.push_back(card);
     }
 
-    void dropCard(int position){
-        hand.erase(hand.begin()+ position -1);
-    }
+
 
     int getNumberCards(){
         return hand.size();
@@ -37,7 +35,7 @@ public: Player(int id){
 
     void showHand(){
         for(int i=0; i<hand.size(); i++)
-            cout << hand.at(i).getNumber() << " " << hand[i].getColour() << endl;
+            cout << hand.at(i).getNumber()-1 << " " << hand[i].getColour() << endl;
     }
 
     void setId(int newId) {
@@ -60,7 +58,7 @@ protected:
 };
 
 
-int main(){
+/**int main(){
     Player player("matheus");
     Deck deck;
     deck.starting();
@@ -71,4 +69,4 @@ int main(){
     player.dropCard(1);
     cout << player.getNumberCards();
 
-}
+}*/

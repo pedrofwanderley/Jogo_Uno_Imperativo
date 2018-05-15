@@ -27,10 +27,13 @@ public: system(){}
     bool checkCard(Card cardHand, Card upCard){
         if(cardHand.getColour().compare(upCard.getColour())==0){
             return true;
-        }else if(cardHand.getNumber()==upCard.getNumber()){
+        }else if(cardHand.getNumber()== upCard.getNumber()){
             return true;
-        }else{
-            return false;
+
+        }else if(cardHand.getEffect().compare("newColour") == 0 || cardHand.getEffect().compare("+4") == 0 ){
+            return true;
+        } else {
+          return false;
         }
     }
 
@@ -57,4 +60,3 @@ private:
     bool hourRotation=true;
 
 };
-
