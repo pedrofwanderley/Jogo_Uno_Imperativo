@@ -5,6 +5,7 @@
 #include <ctime>
 #include <cstdlib>
 #pragma once
+
 using namespace std;
 
 
@@ -26,7 +27,8 @@ public:
 
 
   void starting() {
-    it = deck.insert(it, Card());
+    it = deck.insert(it, Card(-2, "null"));
+
   }
 
   void addCard(Card card) {
