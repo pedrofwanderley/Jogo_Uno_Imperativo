@@ -6,6 +6,7 @@ using namespace std;
 #include "Player/Player.cpp"
 #include "Baralho/SpecialCard.cpp"
 #include "Player/Human.cpp"
+#include "Game/System.cpp"
 
 void distributeCards(Player &player, Deck &deck) {
   for(int p = 0; p < 7; p++) {
@@ -98,20 +99,40 @@ void buildDeck(Deck &deck) {
 int main() {
   srand( time(NULL));
   Deck deck;
+  Deck outDeck;
+  System system;
 
   deck.starting();
+  outDeck.starting();
+
+  Card card(8, "Amarela");
+  outDeck.addCard(card);
 
   buildDeck(deck);
 
   deck.shuffleDeck();
 
   Human player(5, "Joao");
-
   distributeCards(player, deck);
+  for(int i=1; i<6; i++)
+    player.dropCard(i);
   deck.showDeck();
   cout << endl;
   player.showHand();
-  
+  cout << endl;
+  // Definir qual vai ser o primeiro e o ultimo dos decks por enquanto \/
+  if(system.haveCard(player, deck.getDeck()[deck.getCardsInDeck()-1])){
+    system.playCard(player, deck.getDeck()[deck.getCardsInDeck()-1], deck, outDeck);
+  }else{
+    system.pickAndPlay(player, deck, outDeck);
+  }
+  cout << "OUTDECKKKK" << endl;
+  outDeck.showDeck();
+  cout << endl;
+  player.showHand();
+
+
+
 return 1;
 
 }
