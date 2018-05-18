@@ -42,6 +42,63 @@ public: System(){}
             player.addCard(newCard);
     }
 
+    void rotationPlay(Deck &deck, Players[] &players, int &position, bool reversed, Card specialCard){
+        switch(position){
+            case 1:
+                searchTheSpecialCard(specialCard, deck, players, 1, reversed)
+                break;
+            case 2:
+                searchTheSpecialCard(specialCard, deck, players, 2, reversed)
+                break;
+            case 3:
+                searchTheSpecialCard(specialCard, deck, players, 3, reversed)
+                break;
+            case 4:
+                searchTheSpecialCard(specialCard, deck, players, 4, reversed)
+                break;
+        }
+    }
+    // COMO SERÁ DEFINIDA A CARTA PRA BLOQUEAR == BLOCKED
+    // COMO SERA DEFINIDA CARTA +4 == +4
+    // COMO SERA DEFINIDA A CARTA +2 == +2
+    void searchTheSpecialCard(Card specialCard, Deck &deck, Players &players[], int &position, bool reversed){
+        if(specialCard == blocked){
+            if(position > 2)
+                position = position-2;
+            else
+                position = position+2;
+        }else if(reversed){
+            if(position == 1)
+                position = 4;
+            else
+                position--;
+            fourCardOrTwoCard(deck, players, position);
+        }else{
+            position = 1;
+            if(position == 4)
+                position = 1;
+            else
+                position++;
+            fourCardOrTwoCard(deck, players, position);
+        }
+    }
+
+    void fourCardOrTwoCard(Deck deck, Players[] players, int &position, int value){
+        if(specialCard == +4){
+                AddToSpecialcard(deck, players, 2, 4);
+        }
+        if(specialCard == +2){
+                AddToSpecialcard(deck, players, 2, 2);
+        }
+    }
+
+    void AddToSpecialcard(Deck &deck, Players[] &players, int position, int value){
+        for(int i=0; i<value; i++){
+            players[position].addCard(deck.pullCard());
+        }
+    }
+
+
 
 private:
 
