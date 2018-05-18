@@ -9,6 +9,7 @@ class SpecialCard: public Card {
 public:
   SpecialCard(int number, string colour, string effect):Card(number, colour) {
     setEffect(effect);
+    setColour(colour);
   }
 
   void setEffect(string newEffect) {
