@@ -109,6 +109,12 @@ private:
         if(cardHand.getNumber()==upCard.getNumber()){
             return true;
         }
+        if (cardHand == specialCard && specialCard.getEffect == "+4") {
+          return true;
+        }
+        if (cardHand == specialCard && specialCard.getEffect == "newColour") {
+          return true;
+        }
             return false;
     }
 
