@@ -18,6 +18,13 @@ public: System(){}
                 secundaryDeck.addCard(player.dropCard(position));
                 break;
             }
+            //Jogandp carta especial +4
+            if(player.getHand().at(position-1).getEffect() == "+4")
+              string colour;
+              scanf("%s", &colour);
+              upCard.setColour(&colour);
+              secundaryDeck.addCard(player.dropCard(position));
+
         }
     }
 
@@ -109,10 +116,10 @@ private:
         if(cardHand.getNumber()==upCard.getNumber()){
             return true;
         }
-        if (cardHand == specialCard && specialCard.getEffect == "+4") {
+        if (typeid(cardHand) == SpecialCard && specialCard.getEffect == "+4") {
           return true;
         }
-        if (cardHand == specialCard && specialCard.getEffect == "newColour") {
+        if (typeid(cardHand) == SpecialCard && specialCard.getEffect == "newColour") {
           return true;
         }
             return false;
