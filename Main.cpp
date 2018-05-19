@@ -68,9 +68,9 @@ void buildDeck(Deck &deck) {
          deck.addCard(card10);
          deck.addCard(card11);
          deck.addCard(card12);
-       } else if(k == 13) {
+       } else if(k == 12) {
 
-         SpecialCard card13(k, "Azul", "+revert");
+         SpecialCard card13(k, "Azul", "revert");
          SpecialCard card14(k, "Verde", "revert");
          SpecialCard card15(k, "Amarela", "revert");
          SpecialCard card16(k, "Vermelha", "revert");
@@ -87,8 +87,8 @@ void buildDeck(Deck &deck) {
    // Adicionando os coringas
    for(int l = 0; l < 4; l++) {
 
-       SpecialCard card20(14, "Preta", "+4");
-       SpecialCard card25(13, "Preta", "newColour");
+       SpecialCard card20(14,"+4");
+       SpecialCard card25(13,"newColour");
        deck.addCard(card20);
        deck.addCard(card25);
     }
