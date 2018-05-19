@@ -87,8 +87,8 @@ void buildDeck(Deck &deck) {
    // Adicionando os coringas
    for(int l = 0; l < 4; l++) {
 
-       SpecialCard card20(14,"+4");
-       SpecialCard card25(13,"newColour");
+       SpecialCard card20(14,"Preta","+4");
+       SpecialCard card25(13,"Preta","newColour");
        deck.addCard(card20);
        deck.addCard(card25);
     }
