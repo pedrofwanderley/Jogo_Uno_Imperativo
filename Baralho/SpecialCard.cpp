@@ -11,6 +11,11 @@ public:
     setEffect(effect);
     setColour(colour);
   }
+  //Segundo construtor, apenas para cartas coringas, que não terão número ou cor
+public:
+  SpecialCard(int number, string effect){
+    setEffect(effect);
+  }
 
   void setEffect(string newEffect) {
     effect = newEffect;
