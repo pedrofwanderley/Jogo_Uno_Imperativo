@@ -6,9 +6,10 @@ using namespace std;
 class Card {
 
 public:
-  Card(int number, string colour) {
+  Card(int number, string colour, string effect) {
       setNumber(number);
       setColour(colour);
+      setEffect(effect);
   }
 
   Card() {
@@ -35,8 +36,12 @@ public:
     number = newNumber;
   }
 
+  void setEffect(string newEffect){
+    effect = newEffect;
+  }
+
   void toString() const {
-    cout << "Card -> Number: " << number << " | Colour: " << colour << endl;
+    cout << "Card -> Number: " << number << " | Colour: " << colour << " | Effect: " << effect << endl;
   }
 
 

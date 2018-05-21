@@ -25,22 +25,22 @@ void buildDeck(Deck &deck) {
 
          if( i ==1){
 
-             Card card1(j, "Azul");
+             Card card1(j, "Azul", " ");
              deck.addCard(card1);
 
          }
 
          else if(i == 2) {
-             Card card2(j, "Verde");
+             Card card2(j, "Verde", "");
              deck.addCard(card2);
 
          }
            else if(i == 3) {
-             Card card3(j, "Amarela");
+             Card card3(j, "Amarela", "");
              deck.addCard(card3);
            }
            else {
-             Card card4(j, "Vermelha");
+             Card card4(j, "Vermelha", "");
              deck.addCard(card4);
            }
          }
@@ -51,30 +51,30 @@ void buildDeck(Deck &deck) {
    //Adicionando as cartas especiais com cores
    for(int k = 10; k < 13; k++) {
        if(k == 10){
-         SpecialCard card5(k, "Azul", "+2");
-         SpecialCard card6(k, "Verde", "+2");
-         SpecialCard card7(k, "Amarela", "+2");
-         SpecialCard card8(k, "Vermelha", "+2");
+         Card card5(k, "Azul", "+2");
+         Card card6(k, "Verde", "+2");
+         Card card7(k, "Amarela", "+2");
+         Card card8(k, "Vermelha", "+2");
          deck.addCard(card5);
          deck.addCard(card6);
          deck.addCard(card7);
          deck.addCard(card8);
 
        } else if(k == 11) {
-         SpecialCard card9(k, "Azul", "block");
-         SpecialCard card10(k, "Verde", "block");
-         SpecialCard card11(k, "Amarela", "block");
-         SpecialCard card12(k, "Vermelha", "block");
+         Card card9(k, "Azul", "blocked");
+         Card card10(k, "Verde", "blocked");
+         Card card11(k, "Amarela", "blocked");
+         Card card12(k, "Vermelha", "blocked");
          deck.addCard(card9);
          deck.addCard(card10);
          deck.addCard(card11);
          deck.addCard(card12);
        } else if(k == 12) {
 
-         SpecialCard card13(k, "Azul", "revert");
-         SpecialCard card14(k, "Verde", "revert");
-         SpecialCard card15(k, "Amarela", "revert");
-         SpecialCard card16(k, "Vermelha", "revert");
+         Card card13(k, "Azul", "reversed");
+         Card card14(k, "Verde", "reversed");
+         Card card15(k, "Amarela", "reversed");
+         Card card16(k, "Vermelha", "reversed");
          deck.addCard(card13);
          deck.addCard(card14);
          deck.addCard(card15);
@@ -88,8 +88,8 @@ void buildDeck(Deck &deck) {
    // Adicionando os coringas
    for(int l = 0; l < 4; l++) {
 
-       SpecialCard card20(14,"Preta","+4");
-       SpecialCard card25(13,"Preta","newColour");
+       Card card20(14,"Preta","+4");
+       Card card25(13,"Preta","+4");
        deck.addCard(card20);
        deck.addCard(card25);
     }
@@ -106,7 +106,7 @@ int main() {
   deck.starting();
   outDeck.starting();
 
-  Card card(8, "Amarela");
+  Card card(8, "Amarela", "");
   outDeck.addCard(card);
 
   buildDeck(deck);

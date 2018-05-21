@@ -57,7 +57,7 @@ public: System(){}
     // COMO SERÁ DEFINIDA A CARTA PRA BLOQUEAR == BLOCKED
     // COMO SERA DEFINIDA CARTA +4 == +4
     // COMO SERA DEFINIDA A CARTA +2 == +2
-    void gameRoutation(Card specialCard, Deck &deck, Player* players, int &position, bool &reversed){
+    void gameRoutation(Card &specialCard, Deck &deck, Player* players, int &position, bool &reversed){
         if(specialCard.getEffect().compare("blocked")==0)
             foundBlockedCard(position);
         else if(specialCard.getEffect().compare("reversed")==0)
@@ -65,12 +65,17 @@ public: System(){}
         else if(specialCard.getEffect().compare("+4")==0){
             normalMoviment(position, reversed);
             fourCardOrTwoCard(deck, players, position, 4);
+            tradeColorIn4(specialCard);
         }else if(specialCard.getEffect().compare("+2")==0){
             normalMoviment(position, reversed);
             fourCardOrTwoCard(deck, players, position, 2);
         }else{
             normalMoviment(position, reversed);
         }
+    }
+
+    void tradeColorIn4(Card &specialCard){
+        specialCard.setEffect("Verde");
     }
 
     void normalMoviment(int &position, bool reversed){

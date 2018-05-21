@@ -28,7 +28,7 @@ public:
 
 
   void starting() {
-    it = deck.insert(it, Card(-2, "null"));
+    it = deck.insert(it, Card(-2, "null", " "));
 
   }
 

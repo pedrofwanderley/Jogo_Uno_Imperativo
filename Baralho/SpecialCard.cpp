@@ -7,7 +7,7 @@ using namespace std;
 
 class SpecialCard: public Card {
 public:
-  SpecialCard(int number, string colour, string effect):Card(number, colour) {
+  SpecialCard(int number, string colour, string effect):Card(number, colour, effect) {
     setEffect(effect);
     setColour(colour);
   }
