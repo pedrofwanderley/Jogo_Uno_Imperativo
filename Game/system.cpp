@@ -41,6 +41,8 @@ public: System(){}
                 return true;
             }else if(players[position].getHand().at(i).getColour().compare(upCard.getColour())==0){
                 return true;
+            }else if(players[position].getHand().at(i).getColour().compare("Preta")==0){
+                return true;
             }
         }
                 return false;
@@ -60,9 +62,10 @@ public: System(){}
     void gameRoutation(Card &specialCard, Deck &deck, Player* players, int &position, bool &reversed){
         if(specialCard.getEffect().compare("blocked")==0)
             foundBlockedCard(position);
-        else if(specialCard.getEffect().compare("reversed")==0)
+        else if(specialCard.getEffect().compare("reversed")==0){
             foundReversedCard(reversed);
-        else if(specialCard.getEffect().compare("+4")==0){
+            normalMoviment(position, reversed);
+        }else if(specialCard.getEffect().compare("+4")==0){
             normalMoviment(position, reversed);
             fourCardOrTwoCard(deck, players, position, 4);
             tradeColorIn4(specialCard);
@@ -75,7 +78,7 @@ public: System(){}
     }
 
     void tradeColorIn4(Card &specialCard){
-        specialCard.setEffect("Verde");
+        specialCard.setColour("Verde");
     }
 
     void normalMoviment(int &position, bool reversed){
@@ -130,10 +133,10 @@ private:
         if(cardHand.getNumber()==upCard.getNumber()){
             return true;
         }
-        /*if (typeid(cardHand) == SpecialCard && specialCard.getEffect == "+4") {
-          return true;
+        if(cardHand.getColour().compare("Preta") == 0){
+            return true;
         }
-        if (typeid(cardHand) == SpecialCard && specialCard.getEffect == "newColour") {
+        /*if (typeid(cardHand) == SpecialCard && specialCard.getEffect == "newColour") {
           return true;
         }*/
             return false;
