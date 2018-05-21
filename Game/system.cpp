@@ -1,29 +1,35 @@
 #include<iostream>
 #include<string>
 #include <typeinfo>
+#pragma once
 
 using namespace std;
 
 #include "../Player/player.cpp"
 #include "../Baralho/deck.cpp"
+#include "../Baralho/SpecialCard.cpp"
+#include "../Baralho/Card.cpp"
 
 
 class System{
 public: System(){}
-    void playCard(Player &player, Card upCard, Deck &primaryDeck, Deck &secundaryDeck){
+    void playCard(Player* players, Card upCard, Deck &primaryDeck, Deck &secundaryDeck){
         while(1){
             int position;
             scanf("%d", &position);
-            if(checkCard(player.getHand().at(position-1), upCard)){
-                secundaryDeck.addCard(player.dropCard(position));
+            if(checkCard(players[0].getHand().at(position-1), upCard)){
+                Card playedCard = players[0].dropCard(position);
+                searchTheSpecialCard(playedCard, primaryDeck, players, 0, true);
+                secundaryDeck.addCard(playedCard);
                 break;
             }
             //Jogandp carta especial +4
-            if(player.getHand().at(position-1).getEffect() == "+4")
+            if(player.getHand().at(position-1).getEffect().compare("+4")){
               string colour;
               scanf("%s", &colour);
               upCard.setColour(&colour);
               secundaryDeck.addCard(player.dropCard(position));
+            }
 
         }
     }
@@ -49,27 +55,27 @@ public: System(){}
             player.addCard(newCard);
     }
 
-    void rotationPlay(Deck &deck, Players[] &players, int &position, bool reversed, Card specialCard){
+    void rotationPlay(Deck &deck, Player* players, int &position, bool reversed, SpecialCard specialCard){
         switch(position){
             case 1:
-                searchTheSpecialCard(specialCard, deck, players, 1, reversed)
+                searchTheSpecialCard(specialCard, deck, players, position, reversed);
                 break;
             case 2:
-                searchTheSpecialCard(specialCard, deck, players, 2, reversed)
+                searchTheSpecialCard(specialCard, deck, players, position, reversed);
                 break;
             case 3:
-                searchTheSpecialCard(specialCard, deck, players, 3, reversed)
+                searchTheSpecialCard(specialCard, deck, players, position, reversed);
                 break;
             case 4:
-                searchTheSpecialCard(specialCard, deck, players, 4, reversed)
+                searchTheSpecialCard(specialCard, deck, players, position, reversed);
                 break;
         }
     }
     // COMO SERÁ DEFINIDA A CARTA PRA BLOQUEAR == BLOCKED
     // COMO SERA DEFINIDA CARTA +4 == +4
     // COMO SERA DEFINIDA A CARTA +2 == +2
-    void searchTheSpecialCard(Card specialCard, Deck &deck, Players &players[], int &position, bool reversed){
-        if(specialCard == blocked){
+    void searchTheSpecialCard(Card specialCard, Deck &deck, Player* players, int &position, bool reversed){
+        if(specialCard.getEffect().compare("blocked")){
             if(position > 2)
                 position = position-2;
             else
@@ -79,27 +85,27 @@ public: System(){}
                 position = 4;
             else
                 position--;
-            fourCardOrTwoCard(deck, players, position);
+            fourCardOrTwoCard(specialCard, deck, players, position);
         }else{
             position = 1;
             if(position == 4)
                 position = 1;
             else
                 position++;
-            fourCardOrTwoCard(deck, players, position);
+            fourCardOrTwoCard(specialCard, deck, players, position);
         }
     }
 
-    void fourCardOrTwoCard(Deck deck, Players[] players, int &position, int value){
-        if(specialCard == +4){
-                AddToSpecialcard(deck, players, 2, 4);
+    void fourCardOrTwoCard(SpecialCard specialCard, Deck deck, Player* players, int position){
+        if(specialCard.getEffect().compare("+4")){
+                AddToSpecialcard(deck, players, position, 4);
         }
-        if(specialCard == +2){
-                AddToSpecialcard(deck, players, 2, 2);
+        if(specialCard.getEffect().compare("+2")){
+                AddToSpecialcard(deck, players, position, 2);
         }
     }
 
-    void AddToSpecialcard(Deck &deck, Players[] &players, int position, int value){
+    void AddToSpecialcard(Deck &deck, Player* players, int position, int value){
         for(int i=0; i<value; i++){
             players[position].addCard(deck.pullCard());
         }
@@ -108,6 +114,7 @@ public: System(){}
 
 
 private:
+    Player player[4];
 
     bool checkCard(Card cardHand, Card upCard){
         if(cardHand.getColour().compare(upCard.getColour())==0){

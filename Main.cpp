@@ -113,9 +113,11 @@ int main() {
   deck.shuffleDeck();
 
   Human player(5, "Joao");
+  Human player2(1, "coutz");
+  Human player3(0, "tibes");
+  Human player4(3, "lukinhas");
+  Player players[4] = {player, player2, player3, player4};
   distributeCards(player, deck);
-  for(int i=1; i<6; i++)
-    player.dropCard(i);
   deck.showDeck();
   cout << endl;
   player.showHand();

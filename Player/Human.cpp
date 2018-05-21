@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-
+#pragma once
 #include <string>
 
 #include "../Baralho/Deck.cpp"
