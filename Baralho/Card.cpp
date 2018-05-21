@@ -23,6 +23,10 @@ public:
     return colour;
   }
 
+  string getEffect(){
+    return effect;
+  }
+
   void setColour(string newColour) {
     colour = newColour;
   }
@@ -39,4 +43,5 @@ public:
 protected:
   int number;
   string colour;
+  string effect;
 };

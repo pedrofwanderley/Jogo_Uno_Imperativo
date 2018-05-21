@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 using namespace std;
 
 #include "Baralho/Deck.cpp"
@@ -100,7 +101,7 @@ int main() {
   srand( time(NULL));
   Deck deck;
   Deck outDeck;
-  System system;
+  System system1;
 
   deck.starting();
   outDeck.starting();
@@ -116,9 +117,42 @@ int main() {
   Human player2(1, "coutz");
   Human player3(0, "tibes");
   Human player4(3, "lukinhas");
-  Player players[4] = {player, player2, player3, player4};
-  distributeCards(player, deck);
-  deck.showDeck();
+
+  int position = 1;
+  bool reversed = false;
+  Player players[5] = {player, player, player2, player3, player4};
+  distributeCards(players[1], deck);
+  distributeCards(players[2], deck);
+  distributeCards(players[3], deck);
+  distributeCards(players[4], deck);
+
+  while(1){
+    outDeck.showDeck();
+    printf("PLAYER 1\n");
+    players[1].showHand();
+    printf("\n\n");
+    printf("PLAYER 2\n");
+    players[2].showHand();
+    printf("\n\n");
+    printf("PLAYER 3\n");
+    players[3].showHand();
+    printf("\n\n");
+    printf("PLAYER 4\n");
+    players[4].showHand();
+    printf("\n\n");
+    outDeck.showDeck();
+    printf("\n\n");
+    printf("JOGADOR %d PODE JOGAR:", position);
+    if(system1.haveCard(players, outDeck.getDeck()[0], position)){
+       system1.playCard(players, outDeck.getDeck()[0], deck, outDeck, position, reversed);
+    }else{
+       system1.pickAndPlay(players[position], deck, outDeck);
+       system1.normalMoviment(position, reversed);
+    }
+       system("cls");
+  }
+
+  /*outDeck.showDeck();
   cout << endl;
   player.showHand();
   cout << endl;
@@ -132,7 +166,7 @@ int main() {
   outDeck.showDeck();
   cout << endl;
   player.showHand();
-
+    */
 
 
 return 1;
