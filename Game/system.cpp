@@ -5,8 +5,8 @@
 
 using namespace std;
 
-#include "../Player/player.cpp"
-#include "../Baralho/deck.cpp"
+#include "../Player/Player.cpp"
+#include "../Baralho/Deck.cpp"
 #include "../Baralho/SpecialCard.cpp"
 #include "../Baralho/Card.cpp"
 

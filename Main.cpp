@@ -7,7 +7,7 @@ using namespace std;
 #include "Player/Player.cpp"
 #include "Baralho/SpecialCard.cpp"
 #include "Player/Human.cpp"
-#include "Game/System.cpp"
+#include "Game/system.cpp"
 
 void distributeCards(Player &player, Deck &deck) {
   for(int p = 0; p < 7; p++) {
