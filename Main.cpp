@@ -89,7 +89,7 @@ void buildDeck(Deck &deck) {
    for(int l = 0; l < 4; l++) {
 
        Card card20(14,"Preta","+4");
-       Card card25(13,"Preta","+4");
+       Card card25(13,"Preta","newColour");
        deck.addCard(card20);
        deck.addCard(card25);
     }

@@ -72,13 +72,25 @@ public: System(){}
         }else if(specialCard.getEffect().compare("+2")==0){
             normalMoviment(position, reversed);
             fourCardOrTwoCard(deck, players, position, 2);
+        }else if(specialCard.getEffect().compare("newColour") == 0) {
+          tradeColorIn4(specialCard);
+          normalMoviment(position, reversed);
         }else{
             normalMoviment(position, reversed);
         }
     }
 
     void tradeColorIn4(Card &specialCard){
-        specialCard.setColour("Verde");
+      string newColour;
+      while(1) {
+        printf("Selecione uma nova cor: Verde, Azul, Amarela, Vermelha| ");
+        getline(cin, newColour);
+
+        if(newColour.compare("Verde")==0 || newColour.compare("Azul")==0 || newColour.compare("Vermelha")==0 || newColour.compare("Amarela")==0) {
+          specialCard.setColour(newColour);
+          break;
+        }
+      }
     }
 
     void normalMoviment(int &position, bool reversed){
@@ -111,7 +123,7 @@ public: System(){}
                 position = position+2;
     }
 
-    void fourCardOrTwoCard(Deck deck, Player* players, int position, int value){
+    void fourCardOrTwoCard(Deck &deck, Player* players, int position, int value){
         AddToSpecialcard(deck, players, position, value);
     }
 
@@ -133,7 +145,7 @@ private:
         if(cardHand.getNumber()==upCard.getNumber()){
             return true;
         }
-        if(cardHand.getColour().compare("Preta") == 0){
+        if(cardHand.getColour().compare("Preta") == 0 || cardHand.getEffect().compare("newColour")==0 || cardHand.getEffect().compare("+4")==0){
             return true;
         }
         /*if (typeid(cardHand) == SpecialCard && specialCard.getEffect == "newColour") {
