@@ -9,6 +9,7 @@ using namespace std;
 #include "../Baralho/Deck.cpp"
 #include "../Baralho/SpecialCard.cpp"
 #include "../Baralho/Card.cpp"
+#include "../Player/secondBot.cpp"
 
 /*
 Classe que representa o sistema de jogo, com métodos que representam as ações que podem ser
@@ -23,20 +24,23 @@ Método usado para um player joga uma carta do deck principal, caso o mesmo tenh
     void playCard(Player* players, Card upCard, Deck &primaryDeck, Deck &secundaryDeck, int &positionRoutation, bool &reversed){
         while(1){
             int position;
-            scanf("%d", &position);
+
+            if(positionRoutation == 1) {
+              scanf("%d", &position);
+            } else {
+              cout << endl << "Jogada da posicao: " << positionRoutation << "Posicao da carta: " << bot.logistic(players, positionRoutation, reversed, upCard) << endl;
+              position = bot.logistic(players, positionRoutation, reversed, upCard);
+            }
+
+            //scanf("%d", &position);
+
             if(checkCard(players[positionRoutation].getHand().at(position-1), upCard)){
                 Card playedCard = players[positionRoutation].dropCard(position);
                 gameRoutation(playedCard, primaryDeck, players, positionRoutation, reversed);
                 secundaryDeck.addCard(playedCard);
                 break;
             }
-            //Jogandp carta especial +4
-            /*if(player.getHand().at(position-1).getEffect().compare("+4")){
-              string colour;
-              scanf("%s", &colour);
-              upCard.setColour(&colour);
-              secundaryDeck.addCard(player.dropCard(position));
-            }*/
+
         }
     }
 
@@ -79,14 +83,25 @@ a carta é direcionada para o deck do player!
             foundReversedCard(reversed);
             normalMoviment(position, reversed);
         }else if(specialCard.getEffect().compare("+4")==0){
+          if(position == 1) {
+            tradeColorIn4(specialCard);
+          } else {
+            specialCard.setColour(bot.chooseBestColour(players, position));
+        }
             normalMoviment(position, reversed);
             fourCardOrTwoCard(deck, players, position, 4);
-            tradeColorIn4(specialCard);
+          //  tradeColorIn4(specialCard);
+
         }else if(specialCard.getEffect().compare("+2")==0){
             normalMoviment(position, reversed);
             fourCardOrTwoCard(deck, players, position, 2);
         }else if(specialCard.getEffect().compare("newColour") == 0) {
-          tradeColorIn4(specialCard);
+          if(position == 1) {
+            tradeColorIn4(specialCard);
+          } else {
+            specialCard.setColour(bot.chooseBestColour(players, position));
+          }
+          //tradeColorIn4(specialCard);
           normalMoviment(position, reversed);
         }else{
             normalMoviment(position, reversed);
@@ -158,6 +173,7 @@ Método que checa se uma carta de bloqueio foi inserida!
 
 private:
     Player player[4];
+    secondBot bot;
 /*
 Método que checa se determinada carta de um player pode ser jogada no deck principal!
 */

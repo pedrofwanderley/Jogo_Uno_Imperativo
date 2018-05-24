@@ -8,6 +8,7 @@ using namespace std;
 #include "Baralho/SpecialCard.cpp"
 #include "Player/Human.cpp"
 #include "Game/system.cpp"
+
 /*
 Método de distribuição de cartas para os players que vão participar do jogo.
 */
@@ -101,6 +102,18 @@ void buildDeck(Deck &deck) {
 
 }
 
+int endGame(Player* players) {
+  int winner = -1;
+
+  for(int i = 1; i <= 4; i++) {
+    if(players[i].getNumberCards() == 0) {
+      winner = i;
+    }
+  }
+
+  return winner;
+}
+
 int main() {
   srand( time(NULL));
   Deck deck;
@@ -130,23 +143,29 @@ int main() {
   distributeCards(players[3], deck);
   distributeCards(players[4], deck);
 
-  while(1){
+
+  while(endGame(players) == -1){
     outDeck.showDeck();
     printf("PLAYER 1\n");
     players[1].showHand();
     printf("\n\n");
     printf("PLAYER 2\n");
+    //cout << players[2].getNumberCards() << endl;
     players[2].showHand();
     printf("\n\n");
     printf("PLAYER 3\n");
+    //cout << players[3].getNumberCards() << endl;
     players[3].showHand();
     printf("\n\n");
     printf("PLAYER 4\n");
+    //cout << players[4].getNumberCards() << endl;
     players[4].showHand();
     printf("\n\n");
     outDeck.showDeck();
     printf("\n\n");
     printf("JOGADOR %d PODE JOGAR:", position);
+    printf("\n\n");
+
     if(system1.haveCard(players, outDeck.getDeck()[0], position)){
        system1.playCard(players, outDeck.getDeck()[0], deck, outDeck, position, reversed);
     }else{
@@ -155,6 +174,8 @@ int main() {
     }
        system("cls");
   }
+
+  printf("O jogador %d venceu!!!", endGame(players));
 
   /*outDeck.showDeck();
   cout << endl;
