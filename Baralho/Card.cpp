@@ -2,7 +2,9 @@
 #include <string>
 #pragma once
 using namespace std;
-
+/*
+Classe que representa uma carta do jogo!
+*/
 class Card {
 
 public:
