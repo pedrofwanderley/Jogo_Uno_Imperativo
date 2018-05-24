@@ -6,7 +6,9 @@ using namespace std;
 
 #include "../Baralho/Deck.cpp"
 
-
+/*
+Classe que representa um player no jogo
+*/
 class Player{
 
 public: Player(int id){
@@ -14,7 +16,9 @@ public: Player(int id){
     }
         Player(){}
 
-
+/*
+Método que adiciona uma carta no deck do player.
+*/
     void addCard(Card card){
         hand.push_back(card);
     }
@@ -32,7 +36,9 @@ public: Player(int id){
     void toString() const{
         cout << "Player --> Name:" << id;
     }
-
+/*
+Método de exibição de cartas de um determinado Player
+*/
     void showHand(){
         for(int i=0; i<hand.size(); i++)
             cout << hand.at(i).getNumber() << " " << hand[i].getColour() << " " << hand[i].getEffect() << endl;
@@ -45,7 +51,9 @@ public: Player(int id){
     int getId() {
       return id;
     }
-
+/*
+Método que representa a retirada de uma carta do deck de um determinado player.
+*/
     Card dropCard(int position){
         Card card = hand[position-1];
         hand.erase(hand.begin()+position-1);
