@@ -10,9 +10,16 @@ using namespace std;
 #include "../Baralho/SpecialCard.cpp"
 #include "../Baralho/Card.cpp"
 
-
+/*
+Classe que representa o sistema de jogo, com métodos que representam as ações que podem ser
+tomadas ou realizadas durante as partidas!
+*/
 class System{
 public: System(){}
+/*
+Método usado para um player joga uma carta do deck principal, caso o mesmo tenha uma carta
+ compatível com a última carta do deck principal!
+*/
     void playCard(Player* players, Card upCard, Deck &primaryDeck, Deck &secundaryDeck, int &positionRoutation, bool &reversed){
         while(1){
             int position;
@@ -34,7 +41,9 @@ public: System(){}
     }
 
 
-
+/*
+Método que checa se o determinado player tem uma carta que seja jogável na rodada!
+*/
     bool haveCard(Player* players, Card upCard, int position){
         for(int i=0; i<players[position].getNumberCards(); i++){
             if(players[position].getHand().at(i).getNumber()==upCard.getNumber()){
@@ -47,7 +56,11 @@ public: System(){}
         }
                 return false;
     }
-
+/*
+Método pegar e jogar, usado quando um player não tem uma carta para jogar, porém ao puxar
+uma carta do deck a carta retirada pode ser jogada no deck principal!! Caso não possa ser jogada
+a carta é direcionada para o deck do player!
+*/
     void pickAndPlay(Player &player, Deck &deck, Deck &outDeck){
         Card newCard = deck.pullCard();
         if(checkCard(newCard, outDeck.getDeck()[outDeck.getCardsInDeck()-1]))
@@ -79,7 +92,9 @@ public: System(){}
             normalMoviment(position, reversed);
         }
     }
-
+/*
+Método de escolha de cor para um player que jogar uma carta especial
+*/
     void tradeColorIn4(Card &specialCard){
       string newColour;
       while(1) {
@@ -92,7 +107,9 @@ public: System(){}
         }
       }
     }
-
+/*
+Método que determina o fluxo do jogo, dependendo da carta jogada!
+*/
     void normalMoviment(int &position, bool reversed){
         if(reversed){
             if(position == 1)
@@ -108,14 +125,18 @@ public: System(){}
     }
 
 
-
+/*
+Método que checa se uma carta de reversão de jogada foi inserida!
+*/
     void foundReversedCard(bool &reversed){
         if(reversed)
             reversed = false;
         else
             reversed = true;
     }
-
+/*
+Método que checa se uma carta de bloqueio foi inserida!
+*/
     void foundBlockedCard(int &position){
             if(position > 2)
                 position = position-2;
@@ -137,7 +158,9 @@ public: System(){}
 
 private:
     Player player[4];
-
+/*
+Método que checa se determinada carta de um player pode ser jogada no deck principal!
+*/
     bool checkCard(Card cardHand, Card upCard){
         if(cardHand.getColour().compare(upCard.getColour())==0){
             return true;
