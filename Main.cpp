@@ -8,7 +8,9 @@ using namespace std;
 #include "Baralho/SpecialCard.cpp"
 #include "Player/Human.cpp"
 #include "Game/system.cpp"
-
+/*
+Método de distribuição de cartas para os players que vão participar do jogo.
+*/
 void distributeCards(Player &player, Deck &deck) {
   for(int p = 0; p < 7; p++) {
     Card card = deck.pullCard();
@@ -17,7 +19,9 @@ void distributeCards(Player &player, Deck &deck) {
   }
 
 }
-
+/*
+Método de construção do deck de cartas do jogo.
+*/
 void buildDeck(Deck &deck) {
   // Adicionando as cartas numericas 0-9
    for(int i = 0; i < 4; i++) {
