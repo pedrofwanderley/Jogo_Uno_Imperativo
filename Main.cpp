@@ -30,7 +30,7 @@ void buildDeck(Deck &deck) {
 
          if( i ==1){
 
-             Card card1(j, "Azul", " ");
+             Card card1(j, "Azul", "");
              deck.addCard(card1);
 
          }
@@ -145,7 +145,6 @@ int main() {
 
 
   while(endGame(players) == -1){
-    outDeck.showDeck();
     printf("PLAYER 1\n");
     players[1].showHand();
     printf("\n\n");
@@ -161,7 +160,7 @@ int main() {
     //cout << players[4].getNumberCards() << endl;
     players[4].showHand();
     printf("\n\n");
-    outDeck.showDeck();
+    outDeck.getDeck()[0].toString();
     printf("\n\n");
     printf("JOGADOR %d PODE JOGAR:", position);
     printf("\n\n");
@@ -171,6 +170,10 @@ int main() {
     }else{
        system1.pickAndPlay(players[position], deck, outDeck);
        system1.normalMoviment(position, reversed);
+    }
+    // TEM Q ARRUMAR AQUIIIIIIII
+    if(deck.getCardsInDeck() == 0){
+        return 0;
     }
        system("cls");
   }

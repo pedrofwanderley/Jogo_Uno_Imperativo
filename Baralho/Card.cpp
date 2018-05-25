@@ -43,7 +43,10 @@ public:
   }
 
   void toString() const {
-    cout << "Card -> Number: " << number << " | Colour: " << colour << " | Effect: " << effect << endl;
+    if(effect.compare(""))
+        cout << "Card -> Number:   | Colour: " << colour << " | Effect: " << effect << endl;
+    else
+        cout << "Card -> Number: " << number << " | Colour: " << colour << endl;
   }
 
 

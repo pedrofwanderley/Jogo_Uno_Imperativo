@@ -22,8 +22,8 @@ public:
     }*/
 
     int logistic(Player* players, int position, bool reversed, Card upCard){
+        zeringValues();
         chooseCards(players, position, reversed, upCard);
-
         int nextOponent = nextPlayer(position, reversed);
         Player myPlayer = players[position];
         Player myOponent = players[nextOponent];
@@ -35,6 +35,15 @@ public:
         }else{
             return midGame();
         }
+    }
+
+    void zeringValues(){
+         positionFour=0;
+         positionTwo=0;
+         positionBlocked=0;
+         positionReversed=0;
+         positionNormalCard=0;
+         positionNewColour=0;
     }
 
     string chooseBestColour(Player* players, int position) {
@@ -188,7 +197,7 @@ public:
                 if(myPlayer.getHand().at(i).getEffect().compare("blocked")==0)
                     positionBlocked=i+1;
                 if(myPlayer.getHand().at(i).getEffect().compare("newColour")==0)
-                  positionNewColour=i+1;
+                    positionNewColour=i+1;
                 if(myPlayer.getHand().at(i).getEffect().compare("")==0)
                     positionNormalCard=i+1;
             }
@@ -240,10 +249,10 @@ public:
         if(cardHand.getNumber()==upCard.getNumber()){
             return true;
         }
-        if(cardHand.getColour().compare("Preta") == 0 || cardHand.getEffect().compare("newColour")==0 || cardHand.getEffect().compare("+4")==0){
+        if(cardHand.getColour().compare("Preta")==0||cardHand.getEffect().compare("newColour")==0 || cardHand.getEffect().compare("+4")==0){
             return true;
         }
-        return false;
+            return false;
     }
 
 

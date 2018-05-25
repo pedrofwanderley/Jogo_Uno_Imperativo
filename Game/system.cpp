@@ -25,14 +25,12 @@ Método usado para um player joga uma carta do deck principal, caso o mesmo tenh
         while(1){
             int position;
 
-            if(positionRoutation == 1) {
+            if(positionRoutation == 0) {
               scanf("%d", &position);
             } else {
               cout << endl << "Jogada da posicao: " << positionRoutation << "Posicao da carta: " << bot.logistic(players, positionRoutation, reversed, upCard) << endl;
               position = bot.logistic(players, positionRoutation, reversed, upCard);
             }
-
-            //scanf("%d", &position);
 
             if(checkCard(players[positionRoutation].getHand().at(position-1), upCard)){
                 Card playedCard = players[positionRoutation].dropCard(position);
@@ -67,7 +65,7 @@ a carta é direcionada para o deck do player!
 */
     void pickAndPlay(Player &player, Deck &deck, Deck &outDeck){
         Card newCard = deck.pullCard();
-        if(checkCard(newCard, outDeck.getDeck()[outDeck.getCardsInDeck()-1]))
+        if(checkCard(newCard, outDeck.getDeck()[0]))
             outDeck.addCard(newCard);
         else
             player.addCard(newCard);
@@ -164,8 +162,10 @@ Método que checa se uma carta de bloqueio foi inserida!
     }
 
     void AddToSpecialcard(Deck &deck, Player* players, int position, int value){
-        for(int i=0; i<value; i++){
-            players[position].addCard(deck.pullCard());
+        if(deck.getCardsInDeck() > value){
+            for(int k=0; k<value; k++){
+                players[position].addCard(deck.pullCard());
+            }
         }
     }
 
