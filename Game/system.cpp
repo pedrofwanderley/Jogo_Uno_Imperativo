@@ -25,10 +25,9 @@ Método usado para um player joga uma carta do deck principal, caso o mesmo tenh
         while(1){
             int position;
 
-            if(positionRoutation == 0) {
+            if(positionRoutation == 1) {
               scanf("%d", &position);
             } else {
-              cout << endl << "Jogada da posicao: " << positionRoutation << "Posicao da carta: " << bot.logistic(players, positionRoutation, reversed, upCard) << endl;
               position = bot.logistic(players, positionRoutation, reversed, upCard);
             }
 

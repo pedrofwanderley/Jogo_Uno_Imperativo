@@ -29,6 +29,7 @@ public:
 
   void starting() {
     it = deck.insert(it, Card(-2, "null", " "));
+    pullCard();
 
   }
 
@@ -51,16 +52,17 @@ public:
   }
 
   Card pullCard() {
+    if(!isEmpty()) {
       Card card = deck[0];
       deck.erase(it);
 
-      if(!isEmpty()) {
+
         cardsInDeck--;
-      }
+
 
       return card;
 
-
+    }
   }
 
 
@@ -96,44 +98,76 @@ public:
 /*int main() {
   srand( time(NULL));
   Deck deck;
+  Deck outDeck;
   deck.starting();
-  cout << deck.isEmpty();
-  Card card(1, "Azul");
+  deck.showDeck();
+  outDeck.showDeck();
+  outDeck.starting();
+
+
+
+
+  Card card(1, "Azul", "+2");
+  Card card2(5, "Verde", "+2");
+  Card card3(7, "Amarela", "+2");
+  Card card4(9, "Amarela", "+2");
+  Card card5(5, "Amarela", "+2");
+
   deck.addCard(card);
+  deck.addCard(card2);
+  deck.addCard(card3);
+  deck.addCard(card4);
+  deck.addCard(card5);
 
-  cout << deck.isEmpty();
-
-  deck.pullCard();
-  cout << deck.isEmpty();
-
-    deck.pullCard();
-    Card card2(5, "Verde");
-    card2.toString();
-    deck.addCard(card2);
-    deck.addCard(card);
-
-    cout << deck.isEmpty();
-    deck.pullCard();
-    deck.pullCard();
-    cout << deck.isEmpty();
-
-    cout << "End here";
-
-    deck.addCard(card);
-    deck.addCard(card);
-    deck.addCard(card2);
+  deck.shuffleDeck();
+  cout << "Antes de tudo" << endl;;
+  cout << "Sou o deck" << endl;
+  deck.showDeck();
+  cout << "Sou o outdeck" << endl;
+  outDeck.showDeck();
 
 
-    deck.showDeck();
+  outDeck.addCard(deck.pullCard());
+  outDeck.addCard(deck.pullCard());
+  outDeck.addCard(deck.pullCard());
+  outDeck.addCard(deck.pullCard());
+  outDeck.addCard(deck.pullCard());
+
+
+  cout << "Depois de adicionar no out" << endl;
+  cout << "Sou o deck" << endl;
+  deck.showDeck();
+  cout << "Sou o outDeck" << endl;
+  outDeck.showDeck();
 
 
 
   //deck.showDeck()
+  if(deck.getCardsInDeck() == 0) {
+    cout << "Cheguei aqui!!" << endl;
+    Card upCard = outDeck.pullCard();
+
+
+      deck.addCard(outDeck.pullCard());
+      deck.addCard(outDeck.pullCard());
+      deck.addCard(outDeck.pullCard());
+      deck.addCard(outDeck.pullCard());
 
 
 
 
+    outDeck.addCard(upCard);
+    deck.shuffleDeck();
+  }
 
+
+    cout << "Resultado final:" << endl;
+      cout << "Sou o deck" << endl;
+    deck.showDeck();
+      cout << "Sou o outdeck" << endl;
+    outDeck.showDeck();
+
+    return 1;
 
 
 }*/

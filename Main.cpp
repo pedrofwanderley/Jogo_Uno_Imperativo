@@ -101,9 +101,24 @@ void buildDeck(Deck &deck) {
 
 
 }
-
-int endGame(Player* players) {
+/*
+ O metodo verifica se o jogo está em condições de acabar: Se não tiver mais cartas no deck, ou algum jogador tem 0 cartas na mão.
+*/
+int endGame(Player* players, Deck deck) {
   int winner = -1;
+
+  if(deck.getCardsInDeck() == 0) {
+    cout << "O numero de cartas no deck esgotou! O vencedor sera aquele que tiver menos cartas." << endl;
+
+    winner = 1;
+    for(int i = 2; i <= 4; i++) {
+      if(players[i].getNumberCards() < players[winner].getNumberCards()) {
+        winner = i;
+      }
+    }
+
+    return winner;
+  }
 
   for(int i = 1; i <= 4; i++) {
     if(players[i].getNumberCards() == 0) {
@@ -114,6 +129,7 @@ int endGame(Player* players) {
   return winner;
 }
 
+
 int main() {
   srand( time(NULL));
   Deck deck;
@@ -123,12 +139,13 @@ int main() {
   deck.starting();
   outDeck.starting();
 
-  Card card(8, "Amarela", "");
-  outDeck.addCard(card);
+  //Card card(8, "Amarela", "");
+  //outDeck.addCard(card);
 
   buildDeck(deck);
-
   deck.shuffleDeck();
+
+  outDeck.addCard(deck.pullCard());
 
   Human player(5, "Joao");
   Human player2(1, "coutz");
@@ -143,8 +160,8 @@ int main() {
   distributeCards(players[3], deck);
   distributeCards(players[4], deck);
 
+  while(endGame(players, deck)){
 
-  while(endGame(players) == -1){
     printf("PLAYER 1\n");
     players[1].showHand();
     printf("\n\n");
@@ -162,8 +179,15 @@ int main() {
     printf("\n\n");
     outDeck.getDeck()[0].toString();
     printf("\n\n");
-    printf("JOGADOR %d PODE JOGAR:", position);
+
+    if(position == 1) {
+      printf("JOGADOR %d PODE JOGAR:", position);
+    } else {
+      printf("O BOT %d ACABA DE JOGAR! ", position);
+    }
+
     printf("\n\n");
+
 
     if(system1.haveCard(players, outDeck.getDeck()[0], position)){
        system1.playCard(players, outDeck.getDeck()[0], deck, outDeck, position, reversed);
@@ -171,16 +195,14 @@ int main() {
        system1.pickAndPlay(players[position], deck, outDeck);
        system1.normalMoviment(position, reversed);
     }
-    // TEM Q ARRUMAR AQUIIIIIIII
-    if(deck.getCardsInDeck() == 0){
-        return 0;
-    }
+
        system("cls");
   }
 
-  printf("O jogador %d venceu!!!", endGame(players));
+  printf("O jogador %d venceu!!!", endGame(players, deck));
 
-  /*outDeck.showDeck();
+  /*
+  outDeck.showDeck();
   cout << endl;
   player.showHand();
   cout << endl;
@@ -194,7 +216,7 @@ int main() {
   outDeck.showDeck();
   cout << endl;
   player.showHand();
-    */
+  */
 
 
 return 1;
