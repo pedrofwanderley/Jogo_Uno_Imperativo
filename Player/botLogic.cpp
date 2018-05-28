@@ -4,26 +4,15 @@
 #include "Player.cpp"
 using namespace std;
 
-class secondBot{
+class botLogic{
 
 public:
-    secondBot(){};
-
-    /*
-    vector<pair<Card, int>> chooseCards(Player* players, int position, bool reversed, Card upCard){
-        Player[position] myPlayer;
-        vector<pair<Card, int>> myCards;
-        for(int i=0; i<myPlayer.getNumberCards(); i++){
-            if(checkCard(myPlayer.getHand().at(i), upCard)){
-                myCards.push_back(make_pair(myPlayer.getHand().at(i), i+1));
-            }
-        }
-                return myCards;
-    }*/
+    botLogic(){};
 
     int logistic(Player* players, int position, bool reversed, Card upCard){
         zeringValues();
         chooseCards(players, position, reversed, upCard);
+
         int nextOponent = nextPlayer(position, reversed);
         Player myPlayer = players[position];
         Player myOponent = players[nextOponent];
@@ -51,6 +40,7 @@ public:
       int greenCards = findGreenCards(players, position);
       int yellowCards = findYellowCards(players, position);
       int redCards = findRedCards(players, position);
+
       Player myPlayer = players[position];
 
       int bestColour = findMax(blueCards, greenCards, yellowCards, redCards);
@@ -63,27 +53,26 @@ public:
         return "Amarela";
       } else if(bestColour == 3){
         return "Vermelha";
-      } else {
-        return "Bugado";
       }
 
     }
 
+    /*
+    * O método procura qual cor se repete mais na mão do jogador.
+    */
     int findMax(int blueCards, int greenCards, int yellowCards, int redCards) {
       int bestColour = 0;
 
       int colours[4] = {blueCards, greenCards, yellowCards, redCards};
 
-      for(int i = 0; i < 4; i++) {
+      for(int i = 1; i < 4; i++) {
         if(colours[i] >= colours[bestColour]) {
           bestColour = i;
         }
       }
+
+      return bestColour;
     }
-
-
-
-
 
     int findBlueCards(Player* players, int position) {
       int blueCards = 0;
@@ -137,49 +126,64 @@ public:
       return greenCards;
     }
 
+    /*
+    * O método retorna a posição de uma carta para o bot jogar, em uma situação intermediária do jogo.
+    * Uma situação intermediária é quando o inimigo tem 3 cartas na mão.
+    */
     int midGame(){
-        if(positionTwo != 0)
+        if(positionTwo != 0) {
             return positionTwo;
-        else if(positionBlocked != 0)
+        } else if(positionBlocked != 0) {
             return positionBlocked;
-        else if(positionReversed != 0)
+        } else if(positionReversed != 0) {
             return positionReversed;
-        else if(positionNewColour != 0)
+        } else if(positionNewColour != 0) {
           return positionNewColour;
-        else if(positionFour != 0)
+        } else if(positionFour != 0) {
             return positionFour;
-        else
+        } else {
             return positionNormalCard;
+        }
     }
 
+    /*
+    * O método retorna a posição de uma carta para o bot jogar, em uma situação perigosa do jogo.
+    * Uma situação perigosa é quando o inimigo tem no máximo 2 cartas na mão.
+    */
     int dangerGame(){
-        if(positionFour != 0)
+        if(positionFour != 0) {
             return positionFour;
-        else if(positionNewColour != 0)
+        } else if(positionNewColour != 0) {
             return positionNewColour;
-        else if(positionTwo != 0)
+        } else if(positionTwo != 0) {
             return positionTwo;
-        else if(positionBlocked != 0)
+        } else if(positionBlocked != 0) {
             return positionBlocked;
-        else if(positionReversed != 0)
+        } else if(positionReversed != 0) {
             return positionReversed;
-        else
+        } else {
             return positionNormalCard;
+        }
     }
 
+    /*
+    * O método retorna a posição de uma carta para o bot jogar, em uma situação normal do jogo.
+    * Uma situação normal é quando o inimigo tem no mínimo 4 cartas na mão.
+    */
     int safeGame(){
-        if(positionNormalCard != 0)
+        if(positionNormalCard != 0) {
             return positionNormalCard;
-        else if(positionReversed != 0)
+        } else if(positionReversed != 0) {
             return positionReversed;
-        else if(positionBlocked != 0)
+        } else if(positionBlocked != 0) {
             return positionBlocked;
-        else if(positionTwo != 0)
+        } else if(positionTwo != 0) {
             return positionTwo;
-        else if(positionNewColour != 0)
+        } else if(positionNewColour != 0) {
             return positionNewColour;
-        else
+        } else {
             return positionFour;
+        }
     }
 
     void chooseCards(Player* players, int position, bool reversed, Card upCard){
@@ -203,45 +207,7 @@ public:
             }
         }
     }
-    /*
-    vector<int> foundFourCards(){
-        vector<Card> fourCards;
-        for(int i=0; i<chooseCards().size(); i++){
-            if(chooseCards().first.at(i).getColour().compare("Preta")==0)
-                fourCards.push_back(chooseCards().second);
-        }
-            return fourCards;
-    }
 
-    vector<int> foundNormalCards(){
-        vector<Card> normalCards;
-        for(int i=0; i<chooseCards().size(); i++){
-            if(chooseCards().at(i).first.getEffect().compare("")==0)
-                normalCards.push_back(chooseCards().at(i).second);
-        }
-            return normalCards;
-    }
-
-    vector<int> foundBlockedOrReversedCards(){
-        vector<Card> blockedReversedCards;
-        for(int i=0; i<chooseCards().size(); i++){
-            if(chooseCards().at(i).first.getEffect().compare("blocked")==0)
-                blockedReversedCards.push_back(chooseCards().at(i).second);
-            if(chooseCards().at(i).first.getEffect().compare("reversed")==0)
-                blockedReversedCards.push_back(chooseCards().at(i).second);
-        }
-            return blockedReversedCards;
-    }
-
-    vector<int> foundTwoCards(){
-        vector<Card> specialCards;
-        for(int i=0; i<chooseCards().size(); i++){
-            if(chooseCards().at(i).first.getEffect().compare("+2")==0)
-                specialCards.push_back(chooseCards().at(i).second);
-        }
-            return specialCards;
-    }
-    */
     bool checkCard(Card cardHand, Card upCard){
         if(cardHand.getColour().compare(upCard.getColour())==0){
             return true;

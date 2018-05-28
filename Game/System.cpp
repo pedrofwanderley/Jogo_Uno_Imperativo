@@ -7,9 +7,8 @@ using namespace std;
 
 #include "../Player/Player.cpp"
 #include "../Baralho/Deck.cpp"
-#include "../Baralho/SpecialCard.cpp"
 #include "../Baralho/Card.cpp"
-#include "../Player/secondBot.cpp"
+#include "../Player/botLogic.cpp"
 
 /*
 Classe que representa o sistema de jogo, com métodos que representam as ações que podem ser
@@ -74,23 +73,26 @@ a carta é direcionada para o deck do player!
     // COMO SERA DEFINIDA CARTA +4 == +4
     // COMO SERA DEFINIDA A CARTA +2 == +2
     void gameRoutation(Card &specialCard, Deck &deck, Player* players, int &position, bool &reversed){
-        if(specialCard.getEffect().compare("blocked")==0)
+        if(specialCard.getEffect().compare("blocked") == 0) {
             foundBlockedCard(position);
-        else if(specialCard.getEffect().compare("reversed")==0){
+
+        } else if(specialCard.getEffect().compare("reversed") == 0){
             foundReversedCard(reversed);
             normalMoviment(position, reversed);
-        }else if(specialCard.getEffect().compare("+4")==0){
+
+        }else if(specialCard.getEffect().compare("+4") == 0){
           if(position == 1) {
             tradeColorIn4(specialCard);
           } else {
             specialCard.setColour(bot.chooseBestColour(players, position));
-        }
-            normalMoviment(position, reversed);
-            fourCardOrTwoCard(deck, players, position, 4);
-          //  tradeColorIn4(specialCard);
+          }
 
-        }else if(specialCard.getEffect().compare("+2")==0){
+          normalMoviment(position, reversed);
+          fourCardOrTwoCard(deck, players, position, 4);
+
+        }else if(specialCard.getEffect().compare("+2") == 0){
             normalMoviment(position, reversed);
+
             fourCardOrTwoCard(deck, players, position, 2);
         }else if(specialCard.getEffect().compare("newColour") == 0) {
           if(position == 1) {
@@ -98,26 +100,35 @@ a carta é direcionada para o deck do player!
           } else {
             specialCard.setColour(bot.chooseBestColour(players, position));
           }
-          //tradeColorIn4(specialCard);
+
           normalMoviment(position, reversed);
+
         }else{
             normalMoviment(position, reversed);
         }
     }
+
 /*
 Método de escolha de cor para um player que jogar uma carta especial
 */
     void tradeColorIn4(Card &specialCard){
       string newColour;
+      string vazio;
+
       while(1) {
-        printf("Selecione uma nova cor: Verde, Azul, Amarela, Vermelha| ");
+        printf("Selecione uma nova cor: Verde, Azul, Amarela ou Vermelha");
+        cout << endl;
+
+        getline(cin, vazio);
         getline(cin, newColour);
 
-        if(newColour.compare("Verde")==0 || newColour.compare("Azul")==0 || newColour.compare("Vermelha")==0 || newColour.compare("Amarela")==0) {
+        if(newColour.compare("Verde") == 0 || newColour.compare("Azul") == 0 || newColour.compare("Vermelha") == 0 || newColour.compare("Amarela") == 0) {
           specialCard.setColour(newColour);
           break;
         }
+
       }
+
     }
 /*
 Método que determina o fluxo do jogo, dependendo da carta jogada!
@@ -172,7 +183,7 @@ Método que checa se uma carta de bloqueio foi inserida!
 
 private:
     Player player[4];
-    secondBot bot;
+    botLogic bot;
 /*
 Método que checa se determinada carta de um player pode ser jogada no deck principal!
 */

@@ -54,11 +54,11 @@ Método de exibição de cartas de um determinado Player
 /*
 Método que representa a retirada de uma carta do deck de um determinado player.
 */
-    Card dropCard(int position){
+  Card dropCard(int position){
         Card card = hand[position-1];
         hand.erase(hand.begin()+position-1);
         return card;
-    }
+  }
 
 protected:
     vector <Card> hand;
