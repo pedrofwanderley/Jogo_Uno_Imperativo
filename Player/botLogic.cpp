@@ -3,12 +3,16 @@
 #include "../Baralho/Deck.cpp"
 #include "Player.cpp"
 using namespace std;
-
+/*
+Classe que representa um bot no jogo.
+*/
 class botLogic{
 
 public:
     botLogic(){};
-
+/*
+Método que define o nível de dificuldade do bot.
+*/
     int logistic(Player* players, int position, bool reversed, Card upCard){
         zeringValues();
         chooseCards(players, position, reversed, upCard);
@@ -34,7 +38,9 @@ public:
          positionNormalCard=0;
          positionNewColour=0;
     }
-
+/*
+Método de escolha de melhor carta(em funçao da cor da carta) a ser usada pelo bot.
+*/
     string chooseBestColour(Player* players, int position) {
       int blueCards = findBlueCards(players, position);
       int greenCards = findGreenCards(players, position);
@@ -73,7 +79,9 @@ public:
 
       return bestColour;
     }
-
+/*
+Método que procura e retorna as cartas azuis do deck do bot.
+*/
     int findBlueCards(Player* players, int position) {
       int blueCards = 0;
       Player myPlayer = players[position];
@@ -86,7 +94,9 @@ public:
 
       return blueCards;
     }
-
+/*
+Método que procura e retorna as cartas amarelas do deck do bot.
+*/
     int findYellowCards(Player* players, int position) {
       int yellowCards = 0;
       Player myPlayer = players[position];
@@ -99,7 +109,9 @@ public:
 
       return yellowCards;
     }
-
+/*
+Método que procura e retorna as cartas vermelhas no deck do bot.
+*/
     int findRedCards(Player* players, int position) {
       int redCards = 0;
       Player myPlayer = players[position];
@@ -112,7 +124,9 @@ public:
 
       return redCards;
     }
-
+/*
+Método que procura e retorna as cartas verdes no deck do bot.
+*/
     int findGreenCards(Player* players, int position) {
       int greenCards = 0;
       Player myPlayer = players[position];
@@ -185,7 +199,9 @@ public:
             return positionFour;
         }
     }
-
+/*
+Método de escolha de cartas especiais pelo bot.
+*/
     void chooseCards(Player* players, int position, bool reversed, Card upCard){
         Player myPlayer = players[position];
 
@@ -207,7 +223,9 @@ public:
             }
         }
     }
-
+/*
+Método que checa se o player tem possibilidade de jogar na rodada.
+*/
     bool checkCard(Card cardHand, Card upCard){
         if(cardHand.getColour().compare(upCard.getColour())==0){
             return true;
