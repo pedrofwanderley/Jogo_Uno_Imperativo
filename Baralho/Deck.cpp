@@ -12,7 +12,9 @@ using namespace std;
 
 #include "Card.cpp"
 
-
+/*
+Classe que representa um deck de cartas!
+*/
 class Deck {
 
 private:
@@ -26,13 +28,17 @@ public:
 
   }
 
-
+/*
+Iniciando um deck de cartas.
+*/
   void starting() {
     it = deck.insert(it, Card(-2, "null", " "));
     pullCard();
 
   }
-
+/*
+Adicionando uma carta no deck.
+*/
   void addCard(Card card) {
 
     deck.insert(it, 1, card);
@@ -40,7 +46,9 @@ public:
     cardsInDeck++;
 
   }
-
+/*
+Mostrando cartas de um deck.
+*/
   void showDeck() {
     for(int i = 0; i < cardsInDeck; i++) {
       deck.at(i).toString();
@@ -50,7 +58,9 @@ public:
 
 
   }
-
+/*
+Puxando uma carta de um deck.
+*/
   Card pullCard() {
     if(!isEmpty()) {
       Card card = deck[0];
@@ -65,7 +75,9 @@ public:
     }
   }
 
-
+/*
+Embaralhar cartas de um deck.
+*/
   void shuffleDeck () {
     int i,j;
 
