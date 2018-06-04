@@ -29,20 +29,24 @@ void buildDeck(Deck &deck) {
       if(i == 1){
         Card card1(j, "Azul", "");
         deck.addCard(card1);
+        deck.addCard(card1);
       }
 
       else if(i == 2) {
         Card card2(j, "Verde", "");
+        deck.addCard(card2);
         deck.addCard(card2);
       }
 
       else if(i == 3) {
         Card card3(j, "Amarela", "");
         deck.addCard(card3);
+        deck.addCard(card3);
       }
 
       else {
         Card card4(j, "Vermelha", "");
+        deck.addCard(card4);
         deck.addCard(card4);
       }
     }
@@ -151,10 +155,12 @@ void showRules() {
   cout << "3) Cada jogador só pode jogar 1 carta por vez;" << endl;
   cout << "4) Caso o jogador não tenha uma carta válida para a jogada, uma nova carta será automaticamente puxada do deck e jogada, caso seja válida;" << endl;
   cout << "5) O jogo acaba quando não houver mais cartas no deck ou quando algum jogador zerar o número de cartas na mão;" << endl;
-  cout << "6) Caso não houver mais cartas no deck, ganha o jogador que tiver menos cartas!" << endl;
+  cout << "6) Se não houver mais cartas no deck, ganha o jogador que tiver menos cartas!" << endl;
   cout << endl;
 
 }
+
+
 
 void playGame() {
   srand( time(NULL));
@@ -167,8 +173,18 @@ void playGame() {
 
   buildDeck(deck);
   deck.shuffleDeck();
+  deck.shuffleDeck();
 
-  outDeck.addCard(deck.pullCard());
+  Card upCard = deck.pullCard();
+
+  while(upCard.getColour().compare("Preta") == 0) {
+    deck.addCard(upCard);
+    deck.shuffleDeck();
+    upCard = deck.pullCard();
+
+  }
+
+  outDeck.addCard(upCard);
 
   Player player(5);
   Player player2(1);
@@ -189,35 +205,39 @@ void playGame() {
 
   while(winner == -1){
 
-    printf("PLAYER 1\n");
-    players[1].showHand();
-    cout << endl;
-
+    printf("PLAYER 1: %d cartas \n", players[1].getNumberCards());
     printf("PLAYER 2: %d cartas \n", players[2].getNumberCards());
     printf("PLAYER 3: %d cartas \n", players[3].getNumberCards());
     printf("PLAYER 4: %d cartas \n", players[4].getNumberCards());
     cout << endl;
 
-    outDeck.getDeck()[0].toString();
-    cout << endl;
 
     if(position == 1) {
+      printf("PLAYER 1\n");
+      players[1].showHand();
+      cout << endl;
+      cout << endl;
+      outDeck.getDeck()[0].toString();
       printf("JOGADOR %d PODE JOGAR:", position);
+      cout << endl;
+
     } else {
+      cout << endl;
+      outDeck.getDeck()[0].toString();
       printf("O BOT %d ACABA DE JOGAR! ", position);
+      cout << endl;
     }
 
-    printf("\n\n");
 
     if(system1.haveCard(players, outDeck.getDeck()[0], position)){
       system1.playCard(players, outDeck.getDeck()[0], deck, outDeck, position, reversed);
 
     }else{
-      system1.pickAndPlay(players[position], deck, outDeck);
-      system1.normalMoviment(position, reversed);
+      system1.pickAndPlay(players, position, deck, outDeck, reversed);
     }
-      winner = endGame(players, deck);
-    }
+
+    winner = endGame(players, deck);
+  }
 
     printf("O jogador %d venceu!!!", winner);
     printf("\n\n");
@@ -236,6 +256,7 @@ int main() {
 
     if(opr == 1) {
       cout << "Jogo iniciado!!" << endl;
+      cout << endl;
       cout << "Você é o jogador 1!" << endl;
       cout << endl;
       playGame();

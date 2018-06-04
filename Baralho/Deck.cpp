@@ -18,7 +18,7 @@ Classe que representa um deck de cartas!
 class Deck {
 
 private:
-  const int deckSize = 61;
+  const int deckSize = 101;
   vector<Card>  deck;
   vector<Card>::iterator it;
   int cardsInDeck = 0;
@@ -106,80 +106,3 @@ Embaralhar cartas de um deck.
   }
 
 };
-
-/*int main() {
-  srand( time(NULL));
-  Deck deck;
-  Deck outDeck;
-  deck.starting();
-  deck.showDeck();
-  outDeck.showDeck();
-  outDeck.starting();
-
-
-
-
-  Card card(1, "Azul", "+2");
-  Card card2(5, "Verde", "+2");
-  Card card3(7, "Amarela", "+2");
-  Card card4(9, "Amarela", "+2");
-  Card card5(5, "Amarela", "+2");
-
-  deck.addCard(card);
-  deck.addCard(card2);
-  deck.addCard(card3);
-  deck.addCard(card4);
-  deck.addCard(card5);
-
-  deck.shuffleDeck();
-  cout << "Antes de tudo" << endl;;
-  cout << "Sou o deck" << endl;
-  deck.showDeck();
-  cout << "Sou o outdeck" << endl;
-  outDeck.showDeck();
-
-
-  outDeck.addCard(deck.pullCard());
-  outDeck.addCard(deck.pullCard());
-  outDeck.addCard(deck.pullCard());
-  outDeck.addCard(deck.pullCard());
-  outDeck.addCard(deck.pullCard());
-
-
-  cout << "Depois de adicionar no out" << endl;
-  cout << "Sou o deck" << endl;
-  deck.showDeck();
-  cout << "Sou o outDeck" << endl;
-  outDeck.showDeck();
-
-
-
-  //deck.showDeck()
-  if(deck.getCardsInDeck() == 0) {
-    cout << "Cheguei aqui!!" << endl;
-    Card upCard = outDeck.pullCard();
-
-
-      deck.addCard(outDeck.pullCard());
-      deck.addCard(outDeck.pullCard());
-      deck.addCard(outDeck.pullCard());
-      deck.addCard(outDeck.pullCard());
-
-
-
-
-    outDeck.addCard(upCard);
-    deck.shuffleDeck();
-  }
-
-
-    cout << "Resultado final:" << endl;
-      cout << "Sou o deck" << endl;
-    deck.showDeck();
-      cout << "Sou o outdeck" << endl;
-    outDeck.showDeck();
-
-    return 1;
-
-
-}*/

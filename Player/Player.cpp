@@ -64,17 +64,3 @@ protected:
     vector <Card> hand;
     int id;
 };
-
-
-/**int main(){
-    Player player("matheus");
-    Deck deck;
-    deck.starting();
-    Card card(1, "Azul");
-    deck.addCard(card);
-    player.addCard(deck.pullCard());
-    player.showHand();
-    player.dropCard(1);
-    cout << player.getNumberCards();
-
-}*/

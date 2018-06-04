@@ -30,12 +30,16 @@ Método usado para um player joga uma carta do deck principal, caso o mesmo tenh
               position = bot.logistic(players, positionRoutation, reversed, upCard);
             }
 
-            if(checkCard(players[positionRoutation].getHand().at(position-1), upCard)){
-                Card playedCard = players[positionRoutation].dropCard(position);
-                gameRoutation(playedCard, primaryDeck, players, positionRoutation, reversed);
-                secundaryDeck.addCard(playedCard);
-                break;
+            if(players[positionRoutation].getNumberCards() >= position) {
+              if(checkCard(players[positionRoutation].getHand().at(position-1), upCard)){
+                  Card playedCard = players[positionRoutation].dropCard(position);
+                  gameRoutation(playedCard, primaryDeck, players, positionRoutation, reversed);
+                  secundaryDeck.addCard(playedCard);
+                  break;
+                }
             }
+
+            cout << "Tente outra carta!" << endl;
 
         }
     }
@@ -46,7 +50,7 @@ Método que checa se o determinado player tem uma carta que seja jogável na rod
 */
     bool haveCard(Player* players, Card upCard, int position){
         for(int i=0; i<players[position].getNumberCards(); i++){
-            if(players[position].getHand().at(i).getNumber()==upCard.getNumber()){
+            if(players[position].getHand().at(i).getNumber() == upCard.getNumber()){
                 return true;
             }else if(players[position].getHand().at(i).getColour().compare(upCard.getColour())==0){
                 return true;
@@ -61,12 +65,16 @@ Método pegar e jogar, usado quando um player não tem uma carta para jogar, por
 uma carta do deck a carta retirada pode ser jogada no deck principal!! Caso não possa ser jogada
 a carta é direcionada para o deck do player!
 */
-    void pickAndPlay(Player &player, Deck &deck, Deck &outDeck){
+    void pickAndPlay(Player* players, int &position, Deck &deck, Deck &outDeck, bool &reversed){
         Card newCard = deck.pullCard();
-        if(checkCard(newCard, outDeck.getDeck()[0]))
-            outDeck.addCard(newCard);
-        else
-            player.addCard(newCard);
+
+        if(checkCard(newCard, outDeck.getDeck()[0])) {
+          gameRoutation(newCard, deck, players, position, reversed);
+          outDeck.addCard(newCard);
+
+        } else {
+            players[position].addCard(newCard);
+        }
     }
 
     // COMO SERÁ DEFINIDA A CARTA PRA BLOQUEAR == BLOCKED
@@ -197,9 +205,7 @@ Método que checa se determinada carta de um player pode ser jogada no deck prin
         if(cardHand.getColour().compare("Preta") == 0 || cardHand.getEffect().compare("newColour")==0 || cardHand.getEffect().compare("+4")==0){
             return true;
         }
-        /*if (typeid(cardHand) == SpecialCard && specialCard.getEffect == "newColour") {
-          return true;
-        }*/
+
             return false;
     }
 
