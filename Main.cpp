@@ -131,19 +131,38 @@ int endGame(Player* players, Deck deck) {
 
   return winner;
 }
+void testMenu(){
 
+ printf("                      UUUUUUUU     UUUUUUUUNNNNNNNN        NNNNNNNN     OOOOOOOOO\n");
+ printf("                      U::::::U     U::::::UN:::::::N       N::::::N   OO:::::::::OO\n");
+ printf("                      U::::::U     U::::::UN::::::::N      N::::::N OO:::::::::::::OO\n");
+ printf("                      UU:::::U     U:::::UUN:::::::::N     N::::::NO:::::::OOO:::::::O\n");
+ printf("                       U:::::U     U:::::U N::::::::::N    N::::::NO::::::O   O::::::O\n");
+ printf("                       U:::::D     D:::::U N:::::::::::N   N::::::NO:::::O     O:::::O\n");
+ printf("                       U:::::D     D:::::U N:::::::N::::N  N::::::NO:::::O     O:::::O\n");
+ printf("                       U:::::D     D:::::U N::::::N N::::N N::::::NO:::::O     O:::::O\n");
+ printf("                       U:::::D     D:::::U N::::::N  N::::N:::::::NO:::::O     O:::::O\n");
+ printf("                       U:::::D     D:::::U N::::::N   N:::::::::::NO:::::O     O:::::O\n");
+ printf("                       U:::::D     D:::::U N::::::N    N::::::::::NO:::::O     O:::::O\n");
+ printf("                       U::::::U   U::::::U N::::::N     N:::::::::NO::::::O   O::::::O\n");
+ printf("                       U:::::::UUU:::::::U N::::::N      N::::::::NO:::::::OOO:::::::O\n");
+ printf("                       UU:::::::::::::UU  N::::::N       N:::::::N OO:::::::::::::OO\n");
+ printf("                        UU:::::::::UU    N::::::N        N::::::N   OO:::::::::OO\n");
+ printf("                          UUUUUUUUU      NNNNNNNN         NNNNNNN     OOOOOOOOO\n");
+
+}
 void showMenu() {
   cout << endl;
-  cout << "*---------------------------------------------*" << endl;
-  cout << "|------ Seja bem-vindo(a) ao jogo UNO! -------|" << endl;
-  cout << "|---------------------------------------------|" << endl;
-  cout << "|----------- Escolha uma opção: --------------|" << endl;
-  cout << "|---------------------------------------------|" << endl;
-  cout << "|----------- 1) Começar o jogo ---------------|" << endl;
-  cout << "|----------- 2) Ler regras -------------------|" << endl;
-  cout << "|----------- 3) Sair -------------------------|" << endl;
-  cout << "|---------------------------------------------|" << endl;
-  cout << "*---------------------------------------------*" << endl;
+  cout << "\t\t\t\t*---------------------------------------------*" << endl;
+  cout << "\t\t\t\t|------ Seja bem-vindo(a) ao jogo UNO! -------|" << endl;
+  cout << "\t\t\t\t|---------------------------------------------|" << endl;
+  cout << "\t\t\t\t|----------- Escolha uma opção: --------------|" << endl;
+  cout << "\t\t\t\t|---------------------------------------------|" << endl;
+  cout << "\t\t\t\t|----------- 1) Começar o jogo ---------------|" << endl;
+  cout << "\t\t\t\t|----------- 2) Ler regras -------------------|" << endl;
+  cout << "\t\t\t\t|----------- 3) Sair -------------------------|" << endl;
+  cout << "\t\t\t\t|---------------------------------------------|" << endl;
+  cout << "\t\t\t\t*---------------------------------------------*" << endl;
   cout << endl;
 }
 
@@ -250,6 +269,7 @@ int main() {
   int opr = 0;
 
   while(opr != 3) {
+    testMenu();
     showMenu();
     cout << "Opção: " << endl;
     scanf("%d", &opr);
