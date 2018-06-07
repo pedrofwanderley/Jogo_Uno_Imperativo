@@ -40,8 +40,12 @@ Método que adiciona uma carta no deck do player.
 Método de exibição de cartas de um determinado Player
 */
     void showHand(){
-        for(int i=0; i<hand.size(); i++)
-            cout << hand.at(i).getNumber() << " " << hand[i].getColour() << " " << hand[i].getEffect() << endl;
+        for(int i=0; i<hand.size(); i++){
+            if (hand[i].getEffect().compare("") == 0)
+                cout << i+1 << " - " << hand.at(i).getNumber() << " " << hand[i].getColour() << " " << hand[i].getEffect() << endl;
+            else
+                cout << i+1 << " - " << hand[i].getColour() << " " << hand[i].getEffect() << endl;
+        }
     }
 
     void setId(int newId) {

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 using namespace std;
 
 #include "Baralho/Deck.cpp"
@@ -155,8 +157,11 @@ void showMenu() {
   cout << endl;
   cout << "\t\t\t\t*---------------------------------------------*" << endl;
   cout << "\t\t\t\t|------ Seja bem-vindo(a) ao jogo UNO! -------|" << endl;
+  cout << "\t\t\t\t|--------Derrote os ministros do STF ---------|" << endl;
+  cout << "\t\t\t\t|---------  e salve o Brasil  ----------------|" << endl;
   cout << "\t\t\t\t|---------------------------------------------|" << endl;
   cout << "\t\t\t\t|----------- Escolha uma opção: --------------|" << endl;
+  cout << "\t\t\t\t|---------------------------------------------|" << endl;
   cout << "\t\t\t\t|---------------------------------------------|" << endl;
   cout << "\t\t\t\t|----------- 1) Começar o jogo ---------------|" << endl;
   cout << "\t\t\t\t|----------- 2) Ler regras -------------------|" << endl;
@@ -167,16 +172,25 @@ void showMenu() {
 }
 
 void showRules() {
-  cout << endl;
-  cout << "REGRAS DO JOGO!" << endl;
-  cout << "1) O jogo é 1x3, ou seja, um jogador contra 3 bots inteligentes;" << endl;
-  cout << "2) São distribuidas 7 cartas aleatórias para cada jogador;" << endl;
-  cout << "3) Cada jogador só pode jogar 1 carta por vez;" << endl;
-  cout << "4) Caso o jogador não tenha uma carta válida para a jogada, uma nova carta será automaticamente puxada do deck e jogada, caso seja válida;" << endl;
-  cout << "5) O jogo acaba quando não houver mais cartas no deck ou quando algum jogador zerar o número de cartas na mão;" << endl;
-  cout << "6) Se não houver mais cartas no deck, ganha o jogador que tiver menos cartas!" << endl;
-  cout << endl;
+    cout << endl;
+    cout << "REGRAS DO JOGO!" << endl;
+    cout << "1) O jogo é 1x3, ou seja, um jogador contra 3 bots inteligentes;" << endl;
+    cout << "2) São distribuidas 7 cartas aleatórias para cada jogador;" << endl;
+    cout << "3) Cada jogador só pode jogar 1 carta por vez;" << endl;
+    cout << "4) Caso o jogador não tenha uma carta válida para a jogada, uma nova carta será automaticamente puxada do deck e jogada, caso seja válida;" << endl;
+    cout << "5) O jogo acaba quando não houver mais cartas no deck ou quando algum jogador zerar o número de cartas na mão;" << endl;
+    cout << "6) Se não houver mais cartas no deck, ganha o jogador que tiver menos cartas!" << endl;
+    cout << endl << endl << " ---  Aperte qualquer tecla para voltar ---" << endl;
+    getchar();
+    getchar();
+    cout << endl;
 
+}
+
+void delay(unsigned int mseconds)
+{
+    clock_t goal = mseconds + clock();
+    while (goal > clock());
 }
 
 
@@ -224,26 +238,33 @@ void playGame() {
 
   while(winner == -1){
 
-    printf("PLAYER 1: %d cartas \n", players[1].getNumberCards());
-    printf("PLAYER 2: %d cartas \n", players[2].getNumberCards());
-    printf("PLAYER 3: %d cartas \n", players[3].getNumberCards());
-    printf("PLAYER 4: %d cartas \n", players[4].getNumberCards());
+    printf("PLAYER: %d cartas \n", players[1].getNumberCards());
+    printf("BOT DIAS TOFFOLI: %d cartas \n", players[2].getNumberCards());
+    printf("BOT CARMEN LUCIA: %d cartas \n", players[3].getNumberCards());
+    printf("BOT GILMAR MENDES: %d cartas \n", players[4].getNumberCards());
     cout << endl;
 
 
     if(position == 1) {
-      printf("PLAYER 1\n");
+      printf(" -- SUA MAO -- \n\n");
       players[1].showHand();
+      printf("\n-------------- \n");
       cout << endl;
       cout << endl;
       outDeck.getDeck()[0].toString();
-      printf("JOGADOR %d PODE JOGAR:", position);
+      cout << endl;
+      printf("VOCE PODE JOGAR:");
       cout << endl;
 
     } else {
       cout << endl;
       outDeck.getDeck()[0].toString();
-      printf("O BOT %d ACABA DE JOGAR! ", position);
+      if(position == 2)
+            printf("O BOT DIAS TOFFOLI ACABA DE JOGAR!");
+      if(position == 3)
+            printf("O BOT CARMEN LUCIA ACABA DE JOGAR!");
+      if(position == 4)
+            printf("O BOT GILMAR MENDES ACABA DE JOGAR!");
       cout << endl;
     }
 
@@ -254,10 +275,10 @@ void playGame() {
     }else{
       system1.pickAndPlay(players, position, deck, outDeck, reversed);
     }
-
     winner = endGame(players, deck);
+    delay(1000000);
+    system("clear");
   }
-
     printf("O jogador %d venceu!!!", winner);
     printf("\n\n");
 }
@@ -273,11 +294,9 @@ int main() {
     showMenu();
     cout << "Opção: " << endl;
     scanf("%d", &opr);
+    system("clear");
 
     if(opr == 1) {
-      cout << "Jogo iniciado!!" << endl;
-      cout << endl;
-      cout << "Você é o jogador 1!" << endl;
       cout << endl;
       playGame();
 
