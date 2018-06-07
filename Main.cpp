@@ -12,6 +12,25 @@ using namespace std;
 /*
 Método de distribuição de cartas para o player que vai participar do jogo.
 */
+struct Player{
+    vector<Card> hand;
+    int id;
+}
+
+
+struct Card{
+    int number;
+    string colour;
+    string effect;
+}
+
+struct Deck{
+    int sizeDeck;
+    vector<Card> deck;
+    vector<Card>::iterator it;
+    int cardsInDeck;
+}
+
 void distributeCards(Player &player, Deck &deck) {
   for(int p = 0; p < 7; p++) {
     Card card = deck.pullCard();
