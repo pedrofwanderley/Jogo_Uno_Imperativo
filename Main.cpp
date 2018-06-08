@@ -8,33 +8,16 @@ using namespace std;
 #include "Baralho/Card.cpp"
 #include "Player/Player.cpp"
 #include "Game/System.cpp"
+#include "structs.h"
 
 /*
 Método de distribuição de cartas para o player que vai participar do jogo.
 */
-struct Player{
-    vector<Card> hand;
-    int id;
-}
-
-
-struct Card{
-    int number;
-    string colour;
-    string effect;
-}
-
-struct Deck{
-    int sizeDeck;
-    vector<Card> deck;
-    vector<Card>::iterator it;
-    int cardsInDeck;
-}
 
 void distributeCards(Player &player, Deck &deck) {
   for(int p = 0; p < 7; p++) {
-    Card card = deck.pullCard();
-    player.addCard(card);
+    Card card = pullCard(deck);
+    addCard(card, player);
 
   }
 
@@ -48,27 +31,39 @@ void buildDeck(Deck &deck) {
     for(int j = 0; j < 10; j++) {
 
       if(i == 1){
-        Card card1(j, "Azul", "");
-        deck.addCard(card1);
-        deck.addCard(card1);
+        Card card1;
+        card1.number = j;
+        card1.colour ="Azul";
+        card1.effect = "";
+        addCard(card1, deck);
+        addCard(card1, deck);
       }
 
       else if(i == 2) {
-        Card card2(j, "Verde", "");
-        deck.addCard(card2);
-        deck.addCard(card2);
+        Card card2;
+        card2.number = j;
+        card2.colour ="Verde";
+        card2.effect = "";
+        addCard(card2, deck);
+        addCard(card2, deck);
       }
 
       else if(i == 3) {
-        Card card3(j, "Amarela", "");
-        deck.addCard(card3);
-        deck.addCard(card3);
+        Card card3;
+        card3.number = j;
+        card3.colour ="Amarela";
+        card3.effect = "";
+        addCard(card3, deck);
+        addCard(card3, deck);
       }
 
       else {
-        Card card4(j, "Vermelha", "");
-        deck.addCard(card4);
-        deck.addCard(card4);
+        Card card4;
+        card4.number = j;
+        card4.colour ="Vermelha";
+        card4.effect = "";
+        addCard(card4, deck);
+        addCard(card4, deck);
       }
     }
   }
@@ -77,49 +72,89 @@ void buildDeck(Deck &deck) {
    for(int k = 10; k < 13; k++) {
 
        if(k == 10){
-         Card card5(k, "Azul", "+2");
-         Card card6(k, "Verde", "+2");
-         Card card7(k, "Amarela", "+2");
-         Card card8(k, "Vermelha", "+2");
+         Card card5;
+         card5.colour = "Azul";
+         card5.effect = "+2";
+         card5.number = k;
+         Card card6;
+         card6.colour = "Azul";
+         card6.effect = "+2";
+         card6.number = k;
+         Card card7;
+         card7.colour = "Azul";
+         card7.effect = "+2";
+         card7.number = k;
+         Card card8;
+         card8.colour = "Azul";
+         card8.effect = "+2";
+         card8.number = k;
 
-         deck.addCard(card5);
-         deck.addCard(card6);
-         deck.addCard(card7);
-         deck.addCard(card8);
+         addCard(card5, deck);
+         addCard(card6, deck);
+         addCard(card7, deck);
+         addCard(card8, deck);
 
        } else if(k == 11) {
-         Card card9(k, "Azul", "blocked");
-         Card card10(k, "Verde", "blocked");
-         Card card11(k, "Amarela", "blocked");
-         Card card12(k, "Vermelha", "blocked");
+         Card card9;
+         card9.colour = "Azul";
+         card9.effect = "+2";
+         card9.number = k;
+         Card card10;
+         card10.colour = "Azul";
+         card10.effect = "+2";
+         card10.number = k;
+         Card card11;
+         card11.colour = "Azul";
+         card11.effect = "+2";
+         card11.number = k;
+         Card card12;
+         card12.colour = "Azul";
+         card12.effect = "+2";
+         card12.number = k;
 
-         deck.addCard(card9);
-         deck.addCard(card10);
-         deck.addCard(card11);
-         deck.addCard(card12);
+         addCard(card9, deck);
+         addCard(card10, deck);
+         addCard(card11, deck);
+         addCard(card12, deck);
 
        } else if(k == 12) {
 
-         Card card13(k, "Azul", "reversed");
-         Card card14(k, "Verde", "reversed");
-         Card card15(k, "Amarela", "reversed");
-         Card card16(k, "Vermelha", "reversed");
-
-         deck.addCard(card13);
-         deck.addCard(card14);
-         deck.addCard(card15);
-         deck.addCard(card16);
+         Card card13;
+         card13.colour = "Azul";
+         card13.effect = "reversed";
+         card13.number = k;
+         Card card14;
+         card14.colour = "Verde";
+         card14.effect = "reversed";
+         card14.number = k;
+         Card card15;
+         card15.colour = "Amarela";
+         card15.effect = "reversed";
+         card15.number = k;
+         Card card16;
+         card16.colour = "Vermelha";
+         card16.effect = "reversed";
+         card16.number = k;
+         addCard(card13, deck);
+         addCard(card14, deck);
+         addCard(card15, deck);
+         addCard(card16, deck);
        }
      }
 
 
    // Adicionando os coringas
    for(int l = 0; l < 4; l++) {
-       Card card20(14,"Preta","+4");
-       Card card25(13,"Preta","newColour");
-
-       deck.addCard(card20);
-       deck.addCard(card25);
+       Card card20;
+       card20.colour = "Preta";
+       card20.effect = "+4";
+       card20.number = 12;
+       Card card25;
+       card25.colour = "Preta";
+       card25.effect = "newColour";
+       card25.number = 12;
+       addCard(card20, deck);
+       addCard(card25, deck);
     }
 
 
@@ -131,13 +166,13 @@ void buildDeck(Deck &deck) {
 int endGame(Player* players, Deck deck) {
   int winner = -1;
 
-  if(deck.getCardsInDeck() == 0) {
+  if(getCardsInDeck(deck) == 0) {
     cout << "O numero de cartas no deck esgotou! O vencedor sera aquele que tiver menos cartas." << endl;
 
     winner = 1;
 
     for(int i = 2; i <= 4; i++) {
-      if(players[i].getNumberCards() < players[winner].getNumberCards()) {
+      if(getNumberCards(players[i]) < getNumberCards(players[winner])) {
         winner = i;
       }
     }
@@ -145,7 +180,7 @@ int endGame(Player* players, Deck deck) {
   }
 
   for(int i = 1; i <= 4; i++) {
-    if(players[i].getNumberCards() == 0) {
+    if(getNumberCards(players[i]) == 0) {
       winner = i;
     }
   }
@@ -153,7 +188,7 @@ int endGame(Player* players, Deck deck) {
   return winner;
 }
 void testMenu(){
-
+ system("clear");
  printf("                      UUUUUUUU     UUUUUUUUNNNNNNNN        NNNNNNNN     OOOOOOOOO\n");
  printf("                      U::::::U     U::::::UN:::::::N       N::::::N   OO:::::::::OO\n");
  printf("                      U::::::U     U::::::UN::::::::N      N::::::N OO:::::::::::::OO\n");
@@ -212,36 +247,42 @@ void delay(unsigned int mseconds)
     while (goal > clock());
 }
 
+void playGame(){
+  srand(time(NULL));
 
-
-void playGame() {
-  srand( time(NULL));
   Deck deck;
-  Deck outDeck;
-  System system1;
+  deck.it = deck.myDeck.begin();
+  deck.cardsInDeck = 0;
 
-  deck.starting();
-  outDeck.starting();
+  Deck outDeck;
+  outDeck.it = outDeck.myDeck.begin();
+  outDeck.cardsInDeck = 0;
+
+  starting(deck);
+  starting(outDeck);
 
   buildDeck(deck);
-  deck.shuffleDeck();
-  deck.shuffleDeck();
 
-  Card upCard = deck.pullCard();
 
-  while(upCard.getColour().compare("Preta") == 0) {
-    deck.addCard(upCard);
-    deck.shuffleDeck();
-    upCard = deck.pullCard();
+  shuffleDeck(deck);
+  shuffleDeck(deck);
 
+  Card upCard = pullCard(deck);
+
+
+  while(upCard.colour.compare("Preta") == 0) {
+    addCard(upCard, deck);
+    shuffleDeck(deck);
+    upCard = pullCard(deck);
   }
 
-  outDeck.addCard(upCard);
 
-  Player player(5);
-  Player player2(1);
-  Player player3(0);
-  Player player4(3);
+  addCard(upCard, outDeck);
+
+  Player player;
+  Player player2;
+  Player player3;
+  Player player4;
 
   int position = 1;
   bool reversed = false;
@@ -257,27 +298,27 @@ void playGame() {
 
   while(winner == -1){
 
-    printf("PLAYER: %d cartas \n", players[1].getNumberCards());
-    printf("BOT DIAS TOFFOLI: %d cartas \n", players[2].getNumberCards());
-    printf("BOT CARMEN LUCIA: %d cartas \n", players[3].getNumberCards());
-    printf("BOT GILMAR MENDES: %d cartas \n", players[4].getNumberCards());
+    printf("PLAYER: %d cartas \n", getNumberCards(players[1]));
+    printf("BOT DIAS TOFFOLI: %d cartas \n", getNumberCards(players[2]));
+    printf("BOT CARMEN LUCIA: %d cartas \n", getNumberCards(players[3]));
+    printf("BOT GILMAR MENDES: %d cartas \n", getNumberCards(players[4]));
     cout << endl;
 
 
     if(position == 1) {
       printf(" -- SUA MAO -- \n\n");
-      players[1].showHand();
+      showHand(players[1]);
       printf("\n-------------- \n");
       cout << endl;
       cout << endl;
-      outDeck.getDeck()[0].toString();
+      toString(&getDeck(outDeck)[0]);
       cout << endl;
       printf("VOCE PODE JOGAR:");
       cout << endl;
 
     } else {
       cout << endl;
-      outDeck.getDeck()[0].toString();
+      toString(&(getDeck(outDeck)[0]));
       if(position == 2)
             printf("O BOT DIAS TOFFOLI ACABA DE JOGAR!");
       if(position == 3)
@@ -288,11 +329,10 @@ void playGame() {
     }
 
 
-    if(system1.haveCard(players, outDeck.getDeck()[0], position)){
-      system1.playCard(players, outDeck.getDeck()[0], deck, outDeck, position, reversed);
-
+    if(haveCard(players, getDeck(outDeck)[0], position)){
+      playCard(players, getDeck(outDeck)[0], deck, outDeck, position, reversed);
     }else{
-      system1.pickAndPlay(players, position, deck, outDeck, reversed);
+      pickAndPlay(players, position, deck, outDeck, reversed);
     }
     winner = endGame(players, deck);
     delay(1000000);
@@ -314,9 +354,7 @@ int main() {
     cout << "Opção: " << endl;
     scanf("%d", &opr);
     system("clear");
-
     if(opr == 1) {
-      cout << endl;
       playGame();
 
     } else if(opr == 2) {

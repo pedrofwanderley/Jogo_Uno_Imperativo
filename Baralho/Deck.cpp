@@ -9,100 +9,76 @@
 #include <random>
 using namespace std;
 
-
+#include "../structs.h"
 #include "Card.cpp"
 
+
+bool isEmpty(Deck &deck) {
+    return deck.cardsInDeck == 0;
+}
 /*
-Classe que representa um deck de cartas!
+Puxando uma carta de um deck.
 */
-class Deck {
-
-private:
-  const int deckSize = 101;
-  vector<Card>  deck;
-  vector<Card>::iterator it;
-  int cardsInDeck = 0;
-
-public:
-  Deck(): deck(deckSize), it(deck.begin()) {
-
+  Card pullCard(Deck &deck) {
+    if(!isEmpty(deck)) {
+      Card card = deck.myDeck[0];
+      deck.it = deck.myDeck.erase(deck.it);
+      deck.cardsInDeck--;
+      return card;
+    }
   }
+
 
 /*
 Iniciando um deck de cartas.
 */
-  void starting() {
-    it = deck.insert(it, Card(-2, "null", " "));
-    pullCard();
-
+  void starting(Deck &deck) {
+    Card novoCard;
+    novoCard.colour = "";
+    novoCard.effect = "";
+    novoCard.number = -2;
+    deck.it = deck.myDeck.insert(deck.it, novoCard);
+    deck.cardsInDeck++;
+    pullCard(deck);
   }
 /*
 Adicionando uma carta no deck.
 */
-  void addCard(Card card) {
-
-    deck.insert(it, 1, card);
-
-    cardsInDeck++;
-
+  void addCard(Card &card, Deck &deck) {
+    deck.it = deck.myDeck.insert(deck.it, 1, card);
+    deck.cardsInDeck++;
   }
 /*
 Mostrando cartas de um deck.
 */
-  void showDeck() {
-    for(int i = 0; i < cardsInDeck; i++) {
-      deck.at(i).toString();
+  void showDeck(Deck &deck) {
+    for(int i = 0; i < deck.cardsInDeck; i++) {
+      toString(&deck.myDeck.at(i));
     }
-
     cout << endl;
-
-
   }
-/*
-Puxando uma carta de um deck.
-*/
-  Card pullCard() {
-    if(!isEmpty()) {
-      Card card = deck[0];
-      deck.erase(it);
 
-
-        cardsInDeck--;
-
-
-      return card;
-
-    }
-  }
 
 /*
 Embaralhar cartas de um deck.
 */
-  void shuffleDeck () {
+  void shuffleDeck (Deck &deck) {
     int i,j;
-
-    for (i = 0; i < cardsInDeck; i++) {
-
-        do {
-            j = rand()%52;
-        } while (cardsInDeck < j);
-
-        Card card = deck[i];
-        deck[i] = deck[j];
-        deck[j] = card;
+    for (i = 1; i < deck.cardsInDeck; i++) {
+        j = rand() % i;
+        Card card = deck.myDeck[i];
+        deck.myDeck[i] = deck.myDeck[j];
+        deck.myDeck[j] = card;
     }
+
   }
 
-  bool isEmpty() {
-    return cardsInDeck == 0;
+
+  int getCardsInDeck(Deck &deck) {
+    return deck.cardsInDeck;
   }
 
-  int getCardsInDeck() {
-    return cardsInDeck;
+  vector<Card> getDeck(Deck &deck) {
+    return deck.myDeck;
   }
 
-  vector<Card> getDeck() {
-    return deck;
-  }
-
-};

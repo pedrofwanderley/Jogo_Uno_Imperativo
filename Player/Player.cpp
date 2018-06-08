@@ -5,66 +5,42 @@
 using namespace std;
 
 #include "../Baralho/Deck.cpp"
-
-/*
-Classe que representa um player no jogo
-*/
-class Player{
-
-public: Player(int id){
-        setId(id);
-    }
-        Player(){}
+#include "../structs.h"
 
 /*
 Método que adiciona uma carta no deck do player.
 */
-    void addCard(Card card){
-        hand.push_back(card);
+    void addCard(Card card, Player &player){
+        player.hand.push_back(card);
     }
 
 
 
-    int getNumberCards(){
-        return hand.size();
+    int getNumberCards(Player &player){
+        return player.hand.size();
     }
 
-    vector<Card> getHand(){
-        return hand;
+    vector<Card> getHand(Player &player){
+        return player.hand;
     }
 
-    void toString() const{
-        cout << "Player --> Name:" << id;
-    }
 /*
 Método de exibição de cartas de um determinado Player
 */
-    void showHand(){
-        for(int i=0; i<hand.size(); i++){
-            if (hand[i].getEffect().compare("") == 0)
-                cout << i+1 << " - " << hand.at(i).getNumber() << " " << hand[i].getColour() << " " << hand[i].getEffect() << endl;
+    void showHand(Player &player){
+        for(int i=0; i<player.hand.size(); i++){
+            if (player.hand[i].effect.compare("") == 0)
+                cout << i+1 << " - " << player.hand.at(i).number << " " << player.hand[i].colour << " " << player.hand[i].effect << endl;
             else
-                cout << i+1 << " - " << hand[i].getColour() << " " << hand[i].getEffect() << endl;
+                cout << i+1 << " - " << player.hand[i].colour << " " << player.hand[i].effect << endl;
         }
-    }
-
-    void setId(int newId) {
-      id = newId;
-    }
-
-    int getId() {
-      return id;
     }
 /*
 Método que representa a retirada de uma carta do deck de um determinado player.
 */
-  Card dropCard(int position){
-        Card card = hand[position-1];
-        hand.erase(hand.begin()+position-1);
+  Card dropCard(Player &player, int position){
+        Card card = player.hand[position-1];
+        player.hand.erase(player.hand.begin()+position-1);
         return card;
   }
 
-protected:
-    vector <Card> hand;
-    int id;
-};
