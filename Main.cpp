@@ -77,15 +77,15 @@ void buildDeck(Deck &deck) {
          card5.effect = "+2";
          card5.number = k;
          Card card6;
-         card6.colour = "Azul";
+         card6.colour = "Amarela";
          card6.effect = "+2";
          card6.number = k;
          Card card7;
-         card7.colour = "Azul";
+         card7.colour = "Vermelha";
          card7.effect = "+2";
          card7.number = k;
          Card card8;
-         card8.colour = "Azul";
+         card8.colour = "Verde";
          card8.effect = "+2";
          card8.number = k;
 
@@ -97,19 +97,19 @@ void buildDeck(Deck &deck) {
        } else if(k == 11) {
          Card card9;
          card9.colour = "Azul";
-         card9.effect = "+2";
+         card9.effect = "blocked";
          card9.number = k;
          Card card10;
-         card10.colour = "Azul";
-         card10.effect = "+2";
+         card10.colour = "Amarela";
+         card10.effect = "blocked";
          card10.number = k;
          Card card11;
-         card11.colour = "Azul";
-         card11.effect = "+2";
+         card11.colour = "Vermelha";
+         card11.effect = "blocked";
          card11.number = k;
          Card card12;
-         card12.colour = "Azul";
-         card12.effect = "+2";
+         card12.colour = "Verde";
+         card12.effect = "blocked";
          card12.number = k;
 
          addCard(card9, deck);
